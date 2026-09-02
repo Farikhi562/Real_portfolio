@@ -4,6 +4,7 @@ import { NAV } from '../nav.js'
 import './shell.css'
 import IntroOverlay from './IntroOverlay.jsx'
 import EmberField from './EmberField.jsx'
+import ScrollTop from './ScrollTop.jsx'
 
 function useClock() {
   const [time, setTime] = useState(new Date())
@@ -30,6 +31,7 @@ export default function Shell({ children }) {
     <div className="shell">
       <IntroOverlay />
       <EmberField count={10} variant="ambient" />
+      <ScrollTop />
       <header className="titlebar">
         <div className="titlebar-left">
           <button

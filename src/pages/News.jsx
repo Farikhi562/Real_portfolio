@@ -1,14 +1,15 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EmberField from '../components/EmberField.jsx'
+import NewsLightbox from '../components/NewsLightbox.jsx'
 import './news.css'
 
 const NEWS = [
-  { id: 'N01', date: '03 SEP 2026', tag: 'NEXAIR', title: 'AI Innovation — pengembangan sistem prediksi kebakaran & kualitas udara berlanjut.', tone: 'live' },
-  { id: 'N02', date: 'AUG 2026', tag: 'GEMASTIK', title: 'NEXA Campus masuk fase persiapan kompetisi Divisi 11 — Pengembangan Bisnis TIK.', tone: 'ember' },
-  { id: 'N03', date: 'JUL 2026', tag: 'GIEF 2026', title: 'NEXA Campus Ecosystem dipamerkan dalam 8th Gunadarma Industrial Engineering Fair.', tone: 'signal' },
-  { id: 'N04', date: '2026', tag: 'BUSINESS PLAN', title: 'Muhamad Fauzan Al Farikhi berpartisipasi dalam Business Plan Competition Zero to Cash.', tone: 'ember' },
-  { id: 'N05', date: '25 APR 2026', tag: 'ICBC', title: 'Fauzan mencapai final dalam International Canvas Business Competition (ICBC).', tone: 'signal' },
+  { id: 'N01', storyId: '01', date: '03 SEP 2026', tag: 'NEXAIR', title: 'AI Innovation — pengembangan sistem prediksi kebakaran & kualitas udara berlanjut.', tone: 'live' },
+  { id: 'N02', storyId: '02', date: 'AUG 2026', tag: 'GEMASTIK', title: 'NEXA Campus masuk fase persiapan kompetisi Divisi 11 — Pengembangan Bisnis TIK.', tone: 'ember' },
+  { id: 'N03', storyId: '03', date: 'JUL 2026', tag: 'GIEF 2026', title: 'NEXA Campus Ecosystem dipamerkan dalam 8th Gunadarma Industrial Engineering Fair.', tone: 'signal' },
+  { id: 'N04', storyId: '04', date: '2026', tag: 'BUSINESS PLAN', title: 'Muhamad Fauzan Al Farikhi berpartisipasi dalam Business Plan Competition Zero to Cash.', tone: 'ember' },
+  { id: 'N05', storyId: '05', date: '25 APR 2026', tag: 'ICBC', title: 'Fauzan mencapai final dalam International Canvas Business Competition (ICBC).', tone: 'signal' },
 ]
 
 const tickerItems = [...NEWS, ...NEWS]
@@ -17,6 +18,7 @@ const STORIES = [
   {
     id: '01', tag: 'NEXAIR / BUILD LOG', date: 'AUG 2026', title: 'Building NEXAIR',
     text: 'Dokumentasi proses pengembangan NEXAIR: eksplorasi data, pemodelan prediksi, pengujian visualisasi, dan iterasi sistem untuk membaca pola kebakaran serta kualitas udara.',
+    detail: 'Dokumentasi proses pengembangan NEXAIR dari sisi riset ke produk: eksplorasi data titik panas dan kualitas udara, iterasi pemodelan prediksi, sampai pengujian visualisasi Gaussian plume yang dipakai di halaman Playground. Fokusnya membaca pola sebaran asap dan risiko kebakaran secara lebih terbaca untuk pengambil keputusan, bukan sekadar angka mentah.',
     images: ['/assets/news/nexair-process-01.jpg', '/assets/news/nexair-process-02.jpg'],
     featured: true,
     category: 'nexair',
@@ -24,6 +26,7 @@ const STORIES = [
   {
     id: '02', tag: 'GEMASTIK XIX', date: 'AUG 2026', title: 'Officially listed as Gunadarma delegate',
     text: 'Nama Muhamad Fauzan Al Farikhi tercantum dalam pengumuman resmi Universitas Gunadarma sebagai Delegasi Divisi XI Pengembangan Bisnis TIK — hasil seleksi internal Gelombang III.',
+    detail: 'Nama Muhamad Fauzan Al Farikhi tercantum dalam pengumuman resmi Universitas Gunadarma sebagai Delegasi Divisi XI Pengembangan Bisnis TIK untuk Gemastik XIX 2026, hasil seleksi internal Gelombang III. NEXA Campus maju sebagai produk yang dibawa tim, dikerjakan bersama Mirza Danisywar Noor Wahyu dan Rangga Dwi Prasetyo.',
     images: ['/assets/news/gemastik-delegation.jpg'],
     link: 'https://kemahasiswaan.gunadarma.ac.id/pengumuman-penetapan-delegasi-universitas-gunadarma-pada-gemastik-tahun-2026-hasil-seleksi-internal-gelombang-iii',
     category: 'competition',
@@ -31,19 +34,27 @@ const STORIES = [
   {
     id: '03', tag: 'GIEF 2026 / EXHIBITION', date: '22–23 JUL 2026', title: 'NEXA Campus goes on display',
     text: 'NEXA Campus Ecosystem dipresentasikan sebagai bagian dari pameran produk inovasi mahasiswa berbasis teknologi digital dan standardisasi di Gunadarma Industrial Engineering Fair 2026.',
+    detail: 'NEXA Campus Ecosystem dipresentasikan sebagai bagian dari pameran produk inovasi mahasiswa berbasis teknologi digital dan standardisasi di 8th Gunadarma Industrial Engineering Fair (GIEF) 2026 — kesempatan untuk menunjukkan produk langsung ke pengunjung pameran, bukan cuma di atas slide.',
     images: ['/assets/news/gief-nexa-campus-01.jpg', '/assets/news/gief-nexa-campus-02.jpg', '/assets/news/gief-nexa-campus-03.jpg'],
     category: 'exhibition',
   },
   {
     id: '04', tag: 'BUSINESS PLAN COMPETITION', date: '2026', title: 'Zero to Cash',
     text: 'Sertifikat apresiasi atas partisipasi dalam Business Plan Competition HIMAMEN Gunadarma dengan tema “Transforming Ideas into Real Business Execution”.',
+    detail: 'Sertifikat apresiasi atas partisipasi dalam Business Plan Competition “Zero to Cash” yang diselenggarakan HIMAMEN Gunadarma, mengangkat tema “Transforming Ideas into Real Business Execution” — latihan menyusun ide bisnis jadi rencana yang bisa dieksekusi, bukan cuma wacana di atas kertas.',
     images: ['/assets/news/business-plan-certificate.png'],
     category: 'competition',
   },
   {
     id: '05', tag: 'ICBC / FINALIST', date: '25 APR 2026', title: 'International Canvas Business Competition',
     text: 'Certificate of Achievement sebagai Finalist dalam International Canvas Business Competition (ICBC) dengan tema “Digital Business Ecosystem for Global Market Expansion”.',
-    images: ['/assets/news/icbc-certificate.jpg'],
+    detail: 'Certificate of Achievement sebagai Finalist dalam International Canvas Business Competition (ICBC) dengan tema “Digital Business Ecosystem for Global Market Expansion”. Babak final berupa sesi pitching langsung di hadapan dewan juri dengan waktu presentasi berjalan real-time — memaparkan progres model bisnis dan traksi awal di depan panel penilai.',
+    images: [
+      '/assets/news/icbc-certificate.jpg',
+      '/assets/news/icbc-final-presentation-01.jpg',
+      '/assets/news/icbc-final-presentation-02.jpg',
+      '/assets/news/icbc-final-presentation-03.jpg',
+    ],
     category: 'competition',
   },
 ]
@@ -55,12 +66,19 @@ const FILTERS = [
   { id: 'exhibition', label: 'Pameran' },
 ]
 
-function Photo({ src, alt, className = '' }) {
-  return <div className={`news-photo ${className}`}><img src={src} alt={alt} loading="lazy" /></div>
+function Photo({ src, alt, className = '', onOpen }) {
+  return (
+    <button type="button" className={`news-photo ${className}`} onClick={onOpen} aria-label={`Perbesar: ${alt}`}>
+      <img src={src} alt={alt} loading="lazy" />
+      <span className="news-photo-zoom mono">⤢ perbesar</span>
+    </button>
+  )
 }
 
 export default function News() {
   const [filter, setFilter] = useState('all')
+  const [lightbox, setLightbox] = useState(null) // { storyId, imageIndex }
+
   const filteredStories = useMemo(
     () => (filter === 'all' ? STORIES : STORIES.filter((s) => s.category === filter)),
     [filter]
@@ -70,6 +88,11 @@ export default function News() {
     STORIES.forEach((s) => { c[s.category] = (c[s.category] || 0) + 1 })
     return c
   }, [])
+
+  const activeStory = lightbox ? STORIES.find((s) => s.id === lightbox.storyId) : null
+  const openStory = (storyId, imageIndex = 0) => setLightbox({ storyId, imageIndex })
+  const closeStory = () => setLightbox(null)
+  const setImageIndex = (i) => setLightbox((v) => (v ? { ...v, imageIndex: i } : v))
 
   return (
     <div className="news-page">
@@ -97,18 +120,23 @@ export default function News() {
       <section className="section ticker-section">
         <div className="ticker-label mono">
           <span>BREAKING / NEXA SIGNAL</span>
-          <span className="dim">AUTO SCROLL · 24/7</span>
+          <span className="dim">AUTO SCROLL · 24/7 · klik untuk detail</span>
         </div>
         <div className="news-marquee" aria-label="News ticker">
           <div className="news-marquee-track">
             {tickerItems.map((item, index) => (
-              <article className="news-chip" key={`${item.id}-${index}`}>
+              <button
+                type="button"
+                className="news-chip"
+                key={`${item.id}-${index}`}
+                onClick={() => openStory(item.storyId)}
+              >
                 <span className={`news-chip-dot ${item.tone}`} />
                 <span className="news-chip-tag">{item.tag}</span>
                 <span className="news-chip-title">{item.title}</span>
                 <span className="news-chip-date">{item.date}</span>
                 <span className="news-chip-arrow">↗</span>
-              </article>
+              </button>
             ))}
           </div>
         </div>
@@ -144,10 +172,20 @@ export default function News() {
                 <p className="story-tag mono">{story.tag}</p>
                 <h2>{story.title}</h2>
                 <p className="dim story-text">{story.text}</p>
-                {story.link && <a className="btn story-link" href={story.link} target="_blank" rel="noreferrer">official announcement ↗</a>}
+                <div className="story-actions">
+                  <button type="button" className="btn story-link" onClick={() => openStory(story.id)}>baca_selengkapnya →</button>
+                  {story.link && <a className="btn btn-ghost story-link" href={story.link} target="_blank" rel="noreferrer">official announcement ↗</a>}
+                </div>
               </div>
               <div className={`story-gallery gallery-${story.images.length}`}>
-                {story.images.map((src, imageIndex) => <Photo key={src} src={src} alt={`${story.title} documentation ${imageIndex + 1}`} />)}
+                {story.images.map((src, imageIndex) => (
+                  <Photo
+                    key={src}
+                    src={src}
+                    alt={`${story.title} documentation ${imageIndex + 1}`}
+                    onOpen={() => openStory(story.id, imageIndex)}
+                  />
+                ))}
               </div>
             </article>
           ))}
@@ -162,6 +200,13 @@ export default function News() {
         </div>
         <Link to="/experiments" className="btn">open_experiments →</Link>
       </section>
+
+      <NewsLightbox
+        story={activeStory}
+        imageIndex={lightbox?.imageIndex || 0}
+        onClose={closeStory}
+        onSetImageIndex={setImageIndex}
+      />
     </div>
   )
 }

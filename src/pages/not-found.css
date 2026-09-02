@@ -1,0 +1,15 @@
+.not-found { position: relative; }
+.nf-ember { z-index: 0; }
+.nf-hero { position: relative; z-index: 1; }
+.nf-console { margin-top: 22px; max-width: 620px; }
+.nf-log {
+  margin: 0;
+  padding: 16px 18px;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--ember-bright);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.nf-routes { display: flex; flex-wrap: wrap; gap: 10px; }
+.nf-route { cursor: pointer; }

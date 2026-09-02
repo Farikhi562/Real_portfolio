@@ -12,6 +12,7 @@ import News from './pages/News.jsx'
 import Nexair from './pages/Nexair.jsx'
 import NexaSphere from './pages/NexaSphere.jsx'
 import NexaCampus from './pages/NexaCampus.jsx'
+import NotFound from './pages/NotFound.jsx'
 import CommandPalette from './components/CommandPalette.jsx'
 import CursorGlow from './components/CursorGlow.jsx'
 
@@ -33,7 +34,7 @@ export default function App() {
         <Route path="/nexair" element={<Nexair />} />
         <Route path="/nexa-sphere" element={<NexaSphere />} />
         <Route path="/nexa-campus" element={<NexaCampus />} />
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Shell>
   )
