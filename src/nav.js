@@ -6,6 +6,7 @@ export const NAV = [
   { path: '/experiments', file: 'experiments.jsx', label: 'Experiments', folder: 'company' },
   { path: '/nexair', file: 'nexair.jsx', label: 'NEXAIR Case Study', folder: 'company' },
   { path: '/nexa-sphere', file: 'nexa-sphere.jsx', label: 'NEXA Sphere Case Study', folder: 'company' },
+  { path: '/nexa-campus', file: 'nexa-campus.jsx', label: 'NEXA Campus Case Study', folder: 'company' },
   { path: '/playground', file: 'playground.jsx', label: 'Playground', folder: 'company' },
   { path: '/logs', file: 'system.log', label: 'System Logs', folder: 'root' },
   { path: '/contact', file: 'contact.jsx', label: 'Deploy', folder: 'root' },

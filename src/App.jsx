@@ -11,6 +11,7 @@ import Contact from './pages/Contact.jsx'
 import News from './pages/News.jsx'
 import Nexair from './pages/Nexair.jsx'
 import NexaSphere from './pages/NexaSphere.jsx'
+import NexaCampus from './pages/NexaCampus.jsx'
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/news" element={<News />} />
         <Route path="/nexair" element={<Nexair />} />
         <Route path="/nexa-sphere" element={<NexaSphere />} />
+        <Route path="/nexa-campus" element={<NexaCampus />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Shell>
