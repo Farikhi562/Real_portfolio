@@ -1,0 +1,3 @@
+import { useEffect, useState } from 'react'
+import './intro-overlay.css'
+export default function IntroOverlay(){const [show,setShow]=useState(true);const [pct,setPct]=useState(0);useEffect(()=>{let i=setInterval(()=>setPct(p=>Math.min(100,p+4)),35);let t=setTimeout(()=>setShow(false),1150);return()=>{clearInterval(i);clearTimeout(t)}},[]);if(!show)return null;return <div className="intro-overlay"><div className="intro-core"><div className="intro-mark">NEXA</div><div className="intro-label mono">SYSTEM INITIALIZATION</div><div className="intro-bar"><span style={{width:`${pct}%`}}/></div><div className="intro-meta mono"><span>loading portfolio</span><span>{pct}%</span></div><div className="intro-status mono">MODEL IN TRAINING <i/></div></div></div>}

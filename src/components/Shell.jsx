@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { NAV } from '../nav.js'
 import './shell.css'
+import IntroOverlay from './IntroOverlay.jsx'
 
 function useClock() {
   const [time, setTime] = useState(new Date())
@@ -26,6 +27,7 @@ export default function Shell({ children }) {
 
   return (
     <div className="shell">
+      <IntroOverlay />
       <header className="titlebar">
         <div className="titlebar-left">
           <button
@@ -101,6 +103,8 @@ export default function Shell({ children }) {
           <main className="page" key={location.pathname}>
             {children}
           </main>
+
+          <div className="live-system mono"><span>● ALL SYSTEMS OPERATIONAL</span><span>build v2.6.09</span><span>AI / DATA / PRODUCT</span><span>AVAILABLE FOR COLLABORATION</span></div>
 
           <footer className="statusbar mono">
             <span className="status-item">

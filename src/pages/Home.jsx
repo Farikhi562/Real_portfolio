@@ -36,6 +36,13 @@ export default function Home() {
         <TerminalBoot />
       </section>
 
+      <section className="section home-how" id="how-i-think">
+        <div className="panel-header mono"><span>how_i_think</span><span className="dim">model methodology</span></div>
+        <div className="thinking-grid">
+          {[["01","IDENTIFY","Find the actual problem before choosing the technology."],["02","MODEL","Turn messy information into structure and measurable signals."],["03","BUILD","Create a system around the problem, not just a demo."],["04","VALIDATE","Test assumptions with data, users, and real constraints."],["05","ITERATE","Improve the system based on evidence." ]].map(([n,t,d])=><article className="think-card" key={n}><span className="think-num mono">{n}</span><h3>{t}</h3><p>{d}</p></article>)}
+        </div>
+      </section>
+
       <section className="section home-news">
         <div className="panel-header mono">
           <span>news.feed</span>

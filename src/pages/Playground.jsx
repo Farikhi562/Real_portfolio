@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import './playground.css'
 
 // Estimasi sederhana dispersi Gaussian plume, stabilitas atmosfer kelas netral (D).
@@ -28,12 +28,14 @@ export default function Playground() {
   const [intensity, setIntensity] = useState(50)
   const [windSpeed, setWindSpeed] = useState(4)
   const [distanceKm, setDistanceKm] = useState(3)
+  const [running, setRunning] = useState(false)
 
   const pm25 = useMemo(
     () => estimatePM25({ intensity, windSpeed, distanceKm }),
     [intensity, windSpeed, distanceKm]
   )
   const category = categorize(pm25)
+  useEffect(() => { if (!running) return; const t = setTimeout(() => setRunning(false), 700); return () => clearTimeout(t) }, [running])
   const gaugePct = Math.min(pm25 / 150, 1)
 
   const curve = useMemo(() => {
@@ -99,7 +101,9 @@ export default function Playground() {
 
           <hr className="divider" />
 
-          <div className="result-row">
+          <div className="play-actions"><button className="btn" onClick={() => setRunning(true)}>{running ? 'running_model...' : 'run_model →'}</button><span className="dim mono">{running ? 'calculating dispersion + risk layer' : 'interactive demo ready'}</span></div>
+
+          <div className={`result-row ${running ? 'model-running' : ''}`}>
             <div className="gauge-wrap">
               <svg viewBox="0 0 140 80" className="gauge">
                 <path d="M10,75 A60,60 0 0,1 130,75" className="gauge-track" />
@@ -131,6 +135,8 @@ export default function Playground() {
               </p>
             </div>
           </div>
+
+          <div className="wind-field" aria-label="Smoke dispersion visualization">{Array.from({length:18},(_,i)=><i key={i} style={{top:`${8+(i%6)*15}%`,left:`${3+(i%3)*7}%`,animationDelay:`${i*.17}s`}}/>)}<div className="fire-source">★</div><div className="smoke-cloud" style={{transform:`scale(${0.65 + gaugePct})`}}/></div>
 
           <div className="curve-wrap">
             <p className="dim mono curve-label">falloff vs jarak (0.5–15 km)</p>

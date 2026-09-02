@@ -277,3 +277,4 @@
   0%, 100% { opacity: .7; }
   50% { opacity: 1; text-shadow: 0 0 9px rgba(61,220,151,.35); }
 }
+.live-system{display:flex;gap:22px;align-items:center;padding:7px 16px;border-top:1px solid var(--line-soft);background:rgba(8,13,18,.8);color:var(--ink-faint);font-size:.62rem;overflow:auto;white-space:nowrap}.live-system span:first-child{color:var(--signal);animation:liveblink 2s ease-in-out infinite}@keyframes liveblink{50%{opacity:.45}}

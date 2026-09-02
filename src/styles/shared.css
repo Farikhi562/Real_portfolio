@@ -410,3 +410,4 @@ h1.page-title {
   0%, 100% { transform: scaleX(.7); opacity: .45; }
   50% { transform: scaleX(1.25); opacity: 1; }
 }
+.btn{position:relative;overflow:hidden;box-shadow:0 8px 30px rgba(31,166,166,.06)}.btn:after{content:'';position:absolute;top:-100%;left:-30%;width:20%;height:300%;transform:rotate(18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);animation:btnshine 4.5s linear infinite;pointer-events:none}@keyframes btnshine{0%,62%{left:-30%}100%{left:140%}}.panel{transition:border-color .3s ease,box-shadow .3s ease}.panel:hover{border-color:rgba(31,166,166,.22);box-shadow:0 18px 60px rgba(0,0,0,.12)}

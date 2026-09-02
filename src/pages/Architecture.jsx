@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './architecture.css'
 
 const LAYERS = [
@@ -25,6 +26,7 @@ const LAYERS = [
 ]
 
 export default function Architecture() {
+  const [selected, setSelected] = useState(null)
   return (
     <div className="architecture">
       <section className="section">
@@ -50,16 +52,27 @@ export default function Architecture() {
                   {layer.nodes.map((n, ni) => (
                     <div
                       key={n}
-                      className={`layer-node ${layer.isOutput ? 'layer-node-output' : ''}`}
+                      className={`layer-node ${layer.isOutput ? 'layer-node-output' : ''} ${selected === n ? 'selected' : ''}`}
                       style={{ animationDelay: `${(li * 0.15) + ni * 0.08}s` }}
+                      onClick={() => setSelected(selected === n ? null : n)}
+                      tabIndex={0}
+                      onKeyDown={(e) => e.key === 'Enter' && setSelected(selected === n ? null : n)}
                     >
-                      {n}
+                      <span>{n}</span><b>↗</b>
                     </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="panel architecture-inspector">
+          <span className="kicker">// node.inspector</span>
+          <h2 className="section-title">{selected || 'Select a node'}</h2>
+          <p className="dim" style={{margin:0}}>{selected ? `Active capability: ${selected}. Hover and click nodes to inspect the architecture layer.` : 'Klik node mana pun untuk membuka inspection state.'}</p>
         </div>
       </section>
 

@@ -12,10 +12,14 @@ import News from './pages/News.jsx'
 import Nexair from './pages/Nexair.jsx'
 import NexaSphere from './pages/NexaSphere.jsx'
 import NexaCampus from './pages/NexaCampus.jsx'
+import CommandPalette from './components/CommandPalette.jsx'
+import CursorGlow from './components/CursorGlow.jsx'
 
 export default function App() {
   return (
     <Shell>
+      <CommandPalette />
+      <CursorGlow />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

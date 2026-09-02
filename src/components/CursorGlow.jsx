@@ -1,0 +1,3 @@
+import { useEffect } from 'react'
+import './cursor-glow.css'
+export default function CursorGlow(){useEffect(()=>{const el=document.createElement('div');el.className='cursor-glow';document.body.appendChild(el);const move=e=>{el.style.transform=`translate3d(${e.clientX}px,${e.clientY}px,0)`};const over=e=>{if(e.target.closest('a,button,input,.layer-node'))el.classList.add('cursor-hot');else el.classList.remove('cursor-hot')};window.addEventListener('pointermove',move);window.addEventListener('pointerover',over);return()=>{window.removeEventListener('pointermove',move);window.removeEventListener('pointerover',over);el.remove()}},[]);return null}

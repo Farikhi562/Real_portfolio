@@ -20,6 +20,13 @@ export default function SystemLogs() {
       </section>
 
       <section className="section">
+        <h2 className="section-title">Achievements / timeline</h2>
+        <div className="panel achievement-timeline">
+          {[['2026','GEMASTIK XIX','Selected as Universitas Gunadarma delegate — Business Development TIK','UNIVERSITY'],['2026','GIEF','NEXA Campus Ecosystem exhibition','EXHIBITION'],['2026','ICBC','Finalist — International Canvas Business Competition','FINALIST'],['2026','Business Plan Competition','Top 7 / HIMAMEN Gunadarma','COMPETITION']].map(([year,title,desc,badge],i)=><article className="achievement" style={{animationDelay:`${i*.12}s`}} key={title}><span className="achievement-year mono">{year}</span><div><h3>{title}</h3><p>{desc}</p></div><span className="tag tag-teal achievement-badge mono">{badge}</span></article>)}
+        </div>
+      </section>
+
+      <section className="section">
         <div className="panel log-panel mono">
           {LOGS.map((log) => (
             <div className={`log-row ${log.current ? 'log-current' : ''}`} key={log.v}>
