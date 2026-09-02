@@ -22,7 +22,7 @@ export default function SystemLogs() {
       <section className="section">
         <h2 className="section-title">Achievements / timeline</h2>
         <div className="panel achievement-timeline">
-          {[['2026','GEMASTIK XIX','Selected as Universitas Gunadarma delegate — Business Development TIK','UNIVERSITY'],['2026','GIEF','NEXA Campus Ecosystem exhibition','EXHIBITION'],['2026','ICBC','Finalist — International Canvas Business Competition','FINALIST'],['2026','Business Plan Competition','Top 7 / HIMAMEN Gunadarma','COMPETITION']].map(([year,title,desc,badge],i)=><article className="achievement" style={{animationDelay:`${i*.12}s`}} key={title}><span className="achievement-year mono">{year}</span><div><h3>{title}</h3><p>{desc}</p></div><span className="tag tag-teal achievement-badge mono">{badge}</span></article>)}
+          {[['2026','GEMASTIK XIX','Selected as Universitas Gunadarma delegate — Business Development TIK','UNIVERSITY'],['2026','GIEF','NEXA Campus Ecosystem exhibition','EXHIBITION'],['2026','ICBC','Finalist — International Canvas Business Competition','FINALIST'],['2026','Business Plan Competition','Top 7 / HIMAMEN Gunadarma','COMPETITION']].map(([year,title,desc,badge],i)=><article className="achievement" style={{animationDelay:`${i*.12}s`}} key={title}><span className="achievement-year mono">{year}</span><div><h3>{title}</h3><p>{desc}</p></div><span className="tag tag-ember achievement-badge mono">{badge}</span></article>)}
         </div>
       </section>
 
@@ -35,6 +35,9 @@ export default function SystemLogs() {
               {log.current && <span className="tag tag-signal log-tag">HEAD</span>}
             </div>
           ))}
+          <div className="log-tail mono dim">
+            <span className="log-tail-caret">$</span> watching for next commit<span className="log-tail-cursor">▌</span>
+          </div>
         </div>
       </section>
     </div>

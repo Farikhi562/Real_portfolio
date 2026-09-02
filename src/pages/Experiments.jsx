@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import EmberField from '../components/EmberField.jsx'
 import './experiments.css'
 
 const STAGES = [
@@ -36,6 +37,7 @@ export default function Experiments() {
 
       <section className="section">
         <div className="panel flagship-panel">
+          <EmberField count={12} variant="vivid" />
           <div className="panel-header mono">
             <span>flagship_experiment</span>
             <span className="tag tag-alert">KOMPRES 16 — AI Innovation</span>
@@ -93,7 +95,7 @@ export default function Experiments() {
           <div className="panel other-exp">
             <div className="panel-header mono">
               <span>NEXA-Sphere</span>
-              <span className="tag tag-teal">ICBC</span>
+              <span className="tag tag-ember">ICBC</span>
             </div>
             <p className="dim" style={{ margin: 0 }}>
               AI-powered ERP / Business Intelligence for MSMEs — menghubungkan data bisnis, external intelligence, forecasting, dan decision support.

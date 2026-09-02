@@ -34,6 +34,9 @@ export default function Contact() {
           Mau kolaborasi, diskusi peluang kerja, atau ngobrolin proyek NEXA?
           Kirim request di bawah.
         </p>
+        <div className="availability-badge mono">
+          <span className="availability-dot" /> AVAILABLE FOR COLLABORATION
+        </div>
       </section>
 
       <section className="section">
@@ -87,7 +90,7 @@ export default function Contact() {
         </div>
         <div className="socials">
           {SOCIALS.map((s) => (
-            <a key={s.label} href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noreferrer' : undefined} className="tag tag-teal social-tag">
+            <a key={s.label} href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noreferrer' : undefined} className="tag tag-ember social-tag">
               {s.label}
             </a>
           ))}

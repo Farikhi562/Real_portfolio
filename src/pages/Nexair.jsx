@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import EmberField from '../components/EmberField.jsx'
 import './nexair.css'
 
 const DATA = [0.78,0.92,0.86,1.08,1.22,1.15,1.31,1.24,1.42,1.34,1.52,1.46,1.61,1.55,1.68,1.58,1.73,1.66,1.82,1.74,1.88,1.79,1.96,1.86]
@@ -54,7 +55,7 @@ export default function Nexair() {
         </div>
         <div className="nexair-hero-visual panel">
           <div className="visual-window mono"><span>nexair / plume_simulation.py</span><span>RUNNING</span></div>
-          <div className="plume-stage"><img src="/assets/news/nexair-process-02.jpg" alt="NEXAIR Gaussian plume visualization" /><div className="plume-overlay"><span>GAUSSIAN PLUME</span><strong>FRP 4.53</strong><span>WIND FROM 275°</span></div></div>
+          <div className="plume-stage"><img src="/assets/news/nexair-process-02.jpg" alt="NEXAIR Gaussian plume visualization" /><EmberField count={14} variant="vivid" /><div className="plume-overlay"><span>GAUSSIAN PLUME</span><strong>FRP 4.53</strong><span>WIND FROM 275°</span></div></div>
           <div className="visual-footer mono"><span>physics_proxy</span><span className="dim">downwind dispersion / active</span></div>
         </div>
       </section>

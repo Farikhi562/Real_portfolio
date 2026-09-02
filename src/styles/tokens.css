@@ -1,20 +1,20 @@
 :root {
   /* ---- color tokens ---- */
-  --void: #060b10;
-  --panel: #0c151d;
-  --panel-raised: #101c26;
-  --line: #1c2b36;
-  --line-soft: #14202a;
-  --teal: #1fa6a6;
-  --teal-bright: #3fd6c8;
-  --teal-deep: #0b3b3b;
-  --navy: #0d1b2a;
-  --ink: #e8eef0;
-  --ink-dim: #7c93a0;
-  --ink-faint: #445661;
+  --void: #0d0706;
+  --panel: #180b09;
+  --panel-raised: #21110d;
+  --line: #3d1912;
+  --line-soft: #26100b;
+  --ember: #ff4433;
+  --ember-bright: #ff8a63;
+  --ember-deep: #4a1208;
+  --navy: #2b1108;
+  --ink: #f5ece6;
+  --ink-dim: #ab8a80;
+  --ink-faint: #5c443c;
   --signal: #3ddc97;
-  --alert: #e0b85c;
-  --danger: #e0673f;
+  --alert: #ffb454;
+  --danger: #ff2d55;
 
   /* ---- type tokens ---- */
   --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
@@ -56,7 +56,7 @@ a {
 }
 
 ::selection {
-  background: var(--teal);
+  background: var(--ember);
   color: var(--void);
 }
 
@@ -72,7 +72,7 @@ a {
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--teal-deep);
+  background: var(--ember-deep);
 }
 
 .mono {
@@ -83,7 +83,7 @@ a {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.04em;
-  color: var(--teal-bright);
+  color: var(--ember-bright);
 }
 
 .dim {
@@ -100,6 +100,6 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--teal-bright);
+  outline: 2px solid var(--ember-bright);
   outline-offset: 2px;
 }

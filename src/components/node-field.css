@@ -4,14 +4,14 @@
   overflow: visible;
 }
 .node-edge {
-  stroke: var(--teal-deep);
+  stroke: var(--ember-deep);
   stroke-width: 1;
   stroke-dasharray: 4 5;
   opacity: 0;
   animation: edge-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards, edge-flow 7s linear infinite;
 }
 .node-dot {
-  fill: var(--teal-bright);
+  fill: var(--ember-bright);
   opacity: 0;
   animation: node-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards, node-pulse 4.8s ease-in-out infinite;
 }

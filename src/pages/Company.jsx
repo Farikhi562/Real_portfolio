@@ -42,6 +42,13 @@ export default function Company() {
         </div>
       </section>
 
+      <section className="section company-stats mono">
+        <div className="stat"><span className="stat-value">{CLIENTS.length}</span><span className="stat-label">klien aktif</span></div>
+        <div className="stat"><span className="stat-value">{PRODUCTS.length}</span><span className="stat-label">produk dibangun</span></div>
+        <div className="stat"><span className="stat-value">4</span><span className="stat-label">kompetisi diikuti</span></div>
+        <div className="stat"><span className="stat-value">1</span><span className="stat-label">produk live production</span></div>
+      </section>
+
       <section className="section">
         <div className="panel-header mono">
           <span>clients</span>
@@ -71,7 +78,7 @@ export default function Company() {
                 <p className="dim product-desc">{p.desc}</p>
                 <div className="product-badges">
                   {p.badges.map((b) => (
-                    <span className="tag tag-teal" key={b}>{b}</span>
+                    <span className="tag tag-ember" key={b}>{b}</span>
                   ))}
                 </div>
               </div>

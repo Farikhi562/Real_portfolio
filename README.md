@@ -63,3 +63,11 @@ Paling gampang pakai Vercel atau Netlify — drag-drop folder ini (setelah
 - Demand forecast sparkline, inventory risk ring, AI recommendation strip
 - Business Data → External Intelligence → AI Analysis → Action narrative
 - NEXA Sphere added to navigation and Experiments case-study CTA
+
+## Update besar-besaran (sesi ini)
+- Tema warna diganti total dari teal → merah/ember (tokens.css + seluruh halaman), termasuk background yang dihangatkan dari biru-gelap ke hitam kemerahan.
+- Komponen baru `EmberField` — partikel bara/api 2D melayang — dipasang ambient di seluruh halaman (lewat Shell) dan versi lebih rapat di News, Playground, Nexair, Experiments.
+- News: filter kategori interaktif (Semua/NEXAIR/Kompetisi/Pameran) + strip statistik live.
+- Playground: preset skenario kebakaran (kecil/sedang/besar/angin kencang) + log riwayat run_model + kategori "Tidak Sehat" kini pakai warna danger yang beda dari "Tidak Sehat (Sensitif)".
+- Home: strip quick-facts di hero. About: progress bar training animasi. Architecture: sinyal berjalan antar layer. Company: strip statistik. SystemLogs: baris live-tail terminal. Contact: badge ketersediaan.
+- Semua build diverifikasi lewat `npm run build` di setiap tahap — tidak ada error.

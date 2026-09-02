@@ -1,0 +1,65 @@
+.ember-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ember-spark {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ember-bright) 0%, var(--ember) 55%, transparent 100%);
+  opacity: 0;
+  animation-name: ember-rise;
+  animation-timing-function: cubic-bezier(0.33, 0.1, 0.4, 1);
+  animation-iteration-count: infinite;
+  filter: blur(0.2px);
+}
+
+.ember-spark-big {
+  box-shadow: 0 0 10px 1px rgba(255, 138, 99, 0.5);
+}
+
+/* Ambient variant: used site-wide via Shell, very sparse and faint.
+   Fixed to the viewport (not the scrolling page) so it reads as one
+   continuous atmosphere rather than restarting per page height. */
+.ember-field-ambient {
+  position: fixed;
+  z-index: 1;
+}
+.ember-field-ambient .ember-spark {
+  opacity: 0;
+  animation-name: ember-rise-ambient;
+  bottom: -12px;
+}
+
+/* Vivid variant: used on themed pages (News, Playground, Nexair) — brighter, denser */
+.ember-field-vivid .ember-spark {
+  filter: blur(0px);
+}
+
+@keyframes ember-rise {
+  0% { transform: translate(0, 0); opacity: 0; }
+  8% { opacity: 0.85; }
+  50% { transform: translate(var(--drift), -55vh); opacity: 0.6; }
+  92% { opacity: 0; }
+  100% { transform: translate(var(--drift), -80vh); opacity: 0; }
+}
+
+@keyframes ember-rise-ambient {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.22; }
+  50% { transform: translate(var(--drift), -60vh); opacity: 0.14; }
+  92% { opacity: 0; }
+  100% { transform: translate(var(--drift), -85vh); opacity: 0; }
+}
+
+@media (max-width: 700px) {
+  .ember-field { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ember-field { display: none; }
+}

@@ -75,6 +75,10 @@ export default function About() {
           <span>training_progress</span>
           <span className="dim">4 checkpoints</span>
         </div>
+        <div className="progress-bar" role="img" aria-label="Training progress: 82%">
+          <span className="progress-fill" style={{ '--pct': '82%' }} />
+          <span className="progress-label mono">82% — epoch semester_03</span>
+        </div>
         <div className="timeline">
           {CHECKPOINTS.map((c, i) => (
             <div className={`timeline-item ${c.current ? 'timeline-current' : ''}`} key={c.id}>

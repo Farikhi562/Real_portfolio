@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import EmberField from '../components/EmberField.jsx'
 import './playground.css'
 
 // Estimasi sederhana dispersi Gaussian plume, stabilitas atmosfer kelas netral (D).
@@ -19,16 +20,25 @@ function estimatePM25({ intensity, windSpeed, distanceKm }) {
 
 function categorize(pm25) {
   if (pm25 <= 15) return { label: 'Baik', cls: 'tag-signal' }
-  if (pm25 <= 40) return { label: 'Sedang', cls: 'tag-teal' }
+  if (pm25 <= 40) return { label: 'Sedang', cls: 'tag-ember' }
   if (pm25 <= 65) return { label: 'Tidak Sehat (Sensitif)', cls: 'tag-alert' }
-  return { label: 'Tidak Sehat', cls: 'tag-alert' }
+  return { label: 'Tidak Sehat', cls: 'tag-danger' }
 }
+
+const SCENARIOS = [
+  { id: 'kecil', label: 'Kebakaran kecil', intensity: 22, windSpeed: 7, distanceKm: 6 },
+  { id: 'sedang', label: 'Kebakaran sedang', intensity: 50, windSpeed: 4, distanceKm: 3 },
+  { id: 'besar', label: 'Kebakaran besar', intensity: 85, windSpeed: 3, distanceKm: 1.5 },
+  { id: 'angin', label: 'Angin kencang', intensity: 60, windSpeed: 13, distanceKm: 2 },
+]
 
 export default function Playground() {
   const [intensity, setIntensity] = useState(50)
   const [windSpeed, setWindSpeed] = useState(4)
   const [distanceKm, setDistanceKm] = useState(3)
   const [running, setRunning] = useState(false)
+  const [activeScenario, setActiveScenario] = useState(null)
+  const [history, setHistory] = useState([])
 
   const pm25 = useMemo(
     () => estimatePM25({ intensity, windSpeed, distanceKm }),
@@ -47,6 +57,21 @@ export default function Playground() {
   }, [intensity, windSpeed])
 
   const maxCurve = Math.max(...curve, 1)
+
+  const applyScenario = (s) => {
+    setIntensity(s.intensity)
+    setWindSpeed(s.windSpeed)
+    setDistanceKm(s.distanceKm)
+    setActiveScenario(s.id)
+  }
+
+  const runModel = () => {
+    setRunning(true)
+    setHistory((h) => [
+      { id: Date.now(), pm25, label: category.label, cls: category.cls, intensity, windSpeed, distanceKm },
+      ...h,
+    ].slice(0, 6))
+  }
 
   return (
     <div className="playground">
@@ -71,13 +96,27 @@ export default function Playground() {
             <span className="dim">live</span>
           </div>
 
+          <div className="scenario-row mono">
+            <span className="dim scenario-label">quick_scenario:</span>
+            {SCENARIOS.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                className={`scenario-chip ${activeScenario === s.id ? 'active' : ''}`}
+                onClick={() => applyScenario(s)}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+
           <div className="controls">
             <Control
               label="Intensitas sumber asap"
               value={intensity}
               min={5}
               max={100}
-              onChange={setIntensity}
+              onChange={(v) => { setIntensity(v); setActiveScenario(null) }}
               unit=""
             />
             <Control
@@ -85,7 +124,7 @@ export default function Playground() {
               value={windSpeed}
               min={1}
               max={15}
-              onChange={setWindSpeed}
+              onChange={(v) => { setWindSpeed(v); setActiveScenario(null) }}
               unit=" m/s"
             />
             <Control
@@ -94,14 +133,14 @@ export default function Playground() {
               min={0.5}
               max={15}
               step={0.5}
-              onChange={setDistanceKm}
+              onChange={(v) => { setDistanceKm(v); setActiveScenario(null) }}
               unit=" km"
             />
           </div>
 
           <hr className="divider" />
 
-          <div className="play-actions"><button className="btn" onClick={() => setRunning(true)}>{running ? 'running_model...' : 'run_model →'}</button><span className="dim mono">{running ? 'calculating dispersion + risk layer' : 'interactive demo ready'}</span></div>
+          <div className="play-actions"><button className="btn" onClick={runModel}>{running ? 'running_model...' : 'run_model →'}</button><span className="dim mono">{running ? 'calculating dispersion + risk layer' : 'interactive demo ready'}</span></div>
 
           <div className={`result-row ${running ? 'model-running' : ''}`}>
             <div className="gauge-wrap">
@@ -136,7 +175,10 @@ export default function Playground() {
             </div>
           </div>
 
-          <div className="wind-field" aria-label="Smoke dispersion visualization">{Array.from({length:18},(_,i)=><i key={i} style={{top:`${8+(i%6)*15}%`,left:`${3+(i%3)*7}%`,animationDelay:`${i*.17}s`}}/>)}<div className="fire-source">★</div><div className="smoke-cloud" style={{transform:`scale(${0.65 + gaugePct})`}}/></div>
+          <div className="wind-field" aria-label="Smoke dispersion visualization">
+            <EmberField count={10} variant="vivid" />
+            {Array.from({length:18},(_,i)=><i key={i} style={{top:`${8+(i%6)*15}%`,left:`${3+(i%3)*7}%`,animationDelay:`${i*.17}s`}}/>)}<div className="fire-source">★</div><div className="smoke-cloud" style={{transform:`scale(${0.65 + gaugePct})`}}/>
+          </div>
 
           <div className="curve-wrap">
             <p className="dim mono curve-label">falloff vs jarak (0.5–15 km)</p>
@@ -149,6 +191,19 @@ export default function Playground() {
               />
             </svg>
           </div>
+
+          {history.length > 0 && (
+            <div className="run-log mono">
+              <p className="dim run-log-label">run_history — {history.length} tercatat</p>
+              {history.map((h) => (
+                <div className="run-log-row" key={h.id}>
+                  <span className="dim">{h.pm25} µg/m³</span>
+                  <span className={`tag ${h.cls}`}>{h.label}</span>
+                  <span className="dim run-log-params">Q{h.intensity} · {h.windSpeed}m/s · {h.distanceKm}km</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>

@@ -1,3 +1,6 @@
+.flagship-panel { position: relative; }
+.flagship-panel > .ember-field { z-index: 0; }
+.flagship-panel > *:not(.ember-field) { position: relative; z-index: 1; }
 .flagship-head {
   display: flex;
   gap: 20px;
@@ -78,7 +81,7 @@
     right: -18px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--teal-deep);
+    color: var(--ember-deep);
     font-family: var(--font-mono);
   }
 }

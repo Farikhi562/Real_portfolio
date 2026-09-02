@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { NAV } from '../nav.js'
 import './shell.css'
 import IntroOverlay from './IntroOverlay.jsx'
+import EmberField from './EmberField.jsx'
 
 function useClock() {
   const [time, setTime] = useState(new Date())
@@ -28,6 +29,7 @@ export default function Shell({ children }) {
   return (
     <div className="shell">
       <IntroOverlay />
+      <EmberField count={10} variant="ambient" />
       <header className="titlebar">
         <div className="titlebar-left">
           <button

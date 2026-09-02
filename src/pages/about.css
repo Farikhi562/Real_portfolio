@@ -57,14 +57,47 @@
   font-size: 0.68rem;
   padding: 4px 8px;
   background: rgba(6, 11, 16, 0.75);
-  border: 1px solid var(--teal-deep);
-  color: var(--teal-bright);
+  border: 1px solid var(--ember-deep);
+  color: var(--ember-bright);
   border-radius: 3px;
 }
 
 .timeline {
   display: flex;
   flex-direction: column;
+}
+
+.progress-bar {
+  position: relative;
+  height: 26px;
+  border-radius: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+.progress-fill {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  border-radius: 20px;
+  background: linear-gradient(90deg, var(--ember-deep), var(--ember), var(--ember-bright));
+  animation: progress-fill-in 1.4s var(--motion-ease) .3s forwards;
+  box-shadow: 0 0 16px rgba(255, 68, 51, 0.35);
+}
+@keyframes progress-fill-in {
+  to { width: var(--pct); }
+}
+.progress-label {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+  font-size: 0.68rem;
+  color: var(--ink);
+  mix-blend-mode: difference;
 }
 .timeline-item {
   display: grid;
@@ -81,13 +114,13 @@
   height: 12px;
   border-radius: 50%;
   background: var(--panel-raised);
-  border: 2px solid var(--teal-deep);
+  border: 2px solid var(--ember-deep);
   flex-shrink: 0;
 }
 .timeline-current .timeline-dot {
-  border-color: var(--teal);
-  background: var(--teal);
-  box-shadow: 0 0 0 4px rgba(31, 166, 166, 0.18);
+  border-color: var(--ember);
+  background: var(--ember);
+  box-shadow: 0 0 0 4px rgba(255, 68, 51, 0.18);
 }
 .timeline-line {
   flex: 1;
@@ -128,7 +161,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(120deg, transparent 35%, rgba(31,166,166,.1) 50%, transparent 65%);
+  background: linear-gradient(120deg, transparent 35%, rgba(255,68,51,.1) 50%, transparent 65%);
   transform: translateX(-110%);
   animation: photo-glass 7s ease-in-out infinite;
 }
@@ -143,7 +176,7 @@
 .about-photo-tag { animation: tag-flicker 3.8s ease-in-out infinite; }
 @keyframes tag-flicker {
   0%, 100% { opacity: .72; }
-  50% { opacity: 1; box-shadow: 0 0 14px rgba(31,166,166,.14); }
+  50% { opacity: 1; box-shadow: 0 0 14px rgba(255,68,51,.14); }
 }
 .timeline-item {
   animation: timeline-in .75s var(--motion-ease) both;
@@ -160,11 +193,11 @@
   animation: current-beacon 2s ease-in-out infinite;
 }
 @keyframes current-beacon {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(31,166,166,.16); }
-  50% { box-shadow: 0 0 0 9px rgba(31,166,166,.03), 0 0 18px rgba(31,166,166,.28); }
+  0%, 100% { box-shadow: 0 0 0 4px rgba(255,68,51,.16); }
+  50% { box-shadow: 0 0 0 9px rgba(255,68,51,.03), 0 0 18px rgba(255,68,51,.28); }
 }
 .timeline-line {
-  background: linear-gradient(to bottom, var(--teal-deep), var(--line), var(--teal-deep));
+  background: linear-gradient(to bottom, var(--ember-deep), var(--line), var(--ember-deep));
   background-size: 100% 220%;
   animation: timeline-flow 4s linear infinite;
 }

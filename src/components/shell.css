@@ -35,7 +35,7 @@
   display: inline-block;
   opacity: 0.85;
 }
-.dot-a { background: #e0673f; }
+.dot-a { background: var(--danger); }
 .dot-b { background: var(--alert); }
 .dot-c { background: var(--signal); }
 .titlebar-path {
@@ -119,12 +119,12 @@
   background: var(--panel-raised);
 }
 .tree-item.active {
-  color: var(--teal-bright);
-  border-left-color: var(--teal);
+  color: var(--ember-bright);
+  border-left-color: var(--ember);
   background: var(--panel-raised);
 }
 .tree-bullet {
-  color: var(--teal-deep);
+  color: var(--ember-deep);
 }
 .sidebar-footer {
   padding: 12px 16px 0;
@@ -169,8 +169,8 @@
   color: var(--ink-dim);
 }
 .tab.active {
-  color: var(--teal-bright);
-  border-bottom-color: var(--teal);
+  color: var(--ember-bright);
+  border-bottom-color: var(--ember);
   background: var(--panel);
 }
 
@@ -194,7 +194,7 @@
   gap: 18px;
   height: 30px;
   padding: 0 16px;
-  background: var(--teal-deep);
+  background: var(--ember-deep);
   color: var(--void);
   font-size: 0.7rem;
   flex-shrink: 0;
@@ -264,7 +264,7 @@
 .drawer-toggle {
   transition: transform .25s var(--motion-ease), border-color .25s ease;
 }
-.drawer-toggle:hover { transform: scale(1.05); border-color: var(--teal-deep); }
+.drawer-toggle:hover { transform: scale(1.05); border-color: var(--ember-deep); }
 .drawer-toggle span {
   transition: transform .3s var(--motion-ease), opacity .2s ease;
 }

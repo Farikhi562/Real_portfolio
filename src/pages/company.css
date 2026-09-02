@@ -28,6 +28,24 @@
   font-weight: 600;
 }
 
+.company-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.company-stats .stat {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  transition: transform .3s var(--motion-ease), border-color .3s ease;
+}
+.company-stats .stat:hover { transform: translateY(-3px); border-color: var(--ember-deep); }
+.company-stats .stat-value { color: var(--ember-bright); }
+@media (max-width: 700px) {
+  .company-stats { grid-template-columns: 1fr 1fr; }
+}
+
 .product-list {
   display: flex;
   flex-direction: column;
@@ -91,7 +109,7 @@
 .product-logo {
   transition: transform .45s var(--motion-ease), filter .35s ease;
 }
-.product-row:hover .product-logo { transform: rotate(-4deg) scale(1.06); filter: drop-shadow(0 0 10px rgba(31,166,166,.18)); }
+.product-row:hover .product-logo { transform: rotate(-4deg) scale(1.06); filter: drop-shadow(0 0 10px rgba(255,68,51,.18)); }
 .product-badges .tag { animation: badge-in 1s var(--motion-ease) both; }
 .product-badges .tag:nth-child(2) { animation-delay: .12s; }
 @keyframes badge-in {

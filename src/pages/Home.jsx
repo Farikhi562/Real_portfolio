@@ -26,6 +26,12 @@ export default function Home() {
             <Link to="/experiments" className="btn">lihat_eksperimen →</Link>
             <Link to="/nexa" className="btn btn-ghost">buka_nexa-tech-labs</Link>
           </div>
+          <div className="hero-stats mono">
+            <div className="stat"><span className="stat-value">1</span><span className="stat-label">tahun pengalaman</span></div>
+            <div className="stat"><span className="stat-value">3.74</span><span className="stat-label">IPK / 4.00</span></div>
+            <div className="stat"><span className="stat-value">3</span><span className="stat-label">produk NEXA</span></div>
+            <div className="stat"><span className="stat-value">2</span><span className="stat-label">klien aktif</span></div>
+          </div>
         </div>
         <div className="hero-visual">
           <NodeField />
@@ -104,7 +110,7 @@ function ModuleCard({ title, desc, status, to }) {
   const statusMap = {
     live: { label: 'live', cls: 'tag-signal' },
     'in-progress': { label: 'training', cls: 'tag-alert' },
-    competed: { label: 'competed', cls: 'tag-teal' },
+    competed: { label: 'competed', cls: 'tag-ember' },
   }
   const s = statusMap[status]
   return (

@@ -11,13 +11,13 @@
   color: var(--signal);
 }
 .boot-caret {
-  color: var(--teal);
+  color: var(--ember);
   margin-right: 6px;
 }
 .cursor-blink {
   display: inline-block;
   margin-left: 2px;
-  color: var(--teal-bright);
+  color: var(--ember-bright);
   animation: blink 1s step-end infinite;
 }
 @keyframes blink {
@@ -39,7 +39,7 @@
   right: 0;
   top: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal-bright), transparent);
+  background: linear-gradient(90deg, transparent, var(--ember-bright), transparent);
   animation: terminal-scan 4s linear infinite;
   opacity: .55;
 }
