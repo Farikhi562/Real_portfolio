@@ -1,0 +1,29 @@
+.terminal-boot {
+  max-width: 560px;
+}
+.boot-line {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  padding: 5px 0;
+  animation: boot-in 0.3s ease both;
+}
+.boot-line-status {
+  color: var(--signal);
+}
+.boot-caret {
+  color: var(--teal);
+  margin-right: 6px;
+}
+.cursor-blink {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--teal-bright);
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes boot-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

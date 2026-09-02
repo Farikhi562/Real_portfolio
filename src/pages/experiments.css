@@ -1,0 +1,90 @@
+.flagship-head {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.flagship-logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  flex-shrink: 0;
+}
+@media (max-width: 560px) {
+  .flagship-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.hypothesis-box {
+  background: var(--void);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+.hypothesis-box p {
+  margin: 0;
+}
+
+.stage-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 780px) {
+  .stage-flow {
+    grid-template-columns: 1fr;
+  }
+}
+.stage-card {
+  position: relative;
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+.stage-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.stage-id {
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.stage-question {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+.stage-method {
+  font-size: 0.74rem;
+  margin: 0;
+}
+.stage-connector {
+  display: none;
+}
+@media (min-width: 781px) {
+  .stage-card:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--teal-deep);
+    font-family: var(--font-mono);
+  }
+}
+
+.other-exp {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

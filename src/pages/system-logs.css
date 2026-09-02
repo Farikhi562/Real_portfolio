@@ -1,0 +1,34 @@
+.log-panel {
+  padding: 8px 0;
+}
+.log-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 13px 24px;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.84rem;
+  flex-wrap: wrap;
+}
+.log-row:last-child {
+  border-bottom: none;
+}
+.log-version {
+  color: var(--teal-bright);
+  flex-shrink: 0;
+  width: 42px;
+}
+.log-text {
+  color: var(--ink-dim);
+  flex: 1;
+  min-width: 200px;
+}
+.log-current {
+  background: rgba(61, 220, 151, 0.05);
+}
+.log-current .log-text {
+  color: var(--ink);
+}
+.log-tag {
+  flex-shrink: 0;
+}
