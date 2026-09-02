@@ -45,7 +45,7 @@
   color: var(--ink-dim);
   opacity: 0;
   transform: translateX(-6px);
-  animation: node-slide-in 0.5s ease forwards;
+  animation: node-slide-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .layer-node-output {
   color: var(--signal);
@@ -54,4 +54,43 @@
 }
 @keyframes node-slide-in {
   to { opacity: 1; transform: translateX(0); }
+}
+
+.network-panel { animation: network-breathe 7s ease-in-out infinite; }
+@keyframes network-breathe {
+  0%, 100% { box-shadow: inset 0 0 0 rgba(31,166,166,0); }
+  50% { box-shadow: inset 0 0 34px rgba(31,166,166,.025); }
+}
+.layer-node {
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s var(--motion-ease), border-color .3s ease, box-shadow .3s ease;
+}
+.layer-node::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 28%;
+  left: -35%;
+  background: linear-gradient(90deg, transparent, rgba(31,166,166,.13), transparent);
+  transform: skewX(-18deg);
+  animation: node-shimmer 5s ease-in-out infinite;
+}
+.layer-node:hover {
+  transform: translateX(5px) scale(1.015);
+  border-color: var(--teal-deep);
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+}
+.layer-node:nth-child(2)::after { animation-delay: .7s; }
+.layer-node:nth-child(3)::after { animation-delay: 1.4s; }
+.layer-node:nth-child(4)::after { animation-delay: 2.1s; }
+@keyframes node-shimmer {
+  0%, 58% { left: -35%; }
+  76%, 100% { left: 125%; }
+}
+.layer-label span:first-child { animation: label-pulse 3.2s ease-in-out infinite; }
+@keyframes label-pulse {
+  0%, 100% { opacity: .75; }
+  50% { opacity: 1; text-shadow: 0 0 12px rgba(31,166,166,.3); }
 }

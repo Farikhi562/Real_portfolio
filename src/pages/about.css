@@ -10,6 +10,30 @@
   }
 }
 
+.about-profile {
+  margin-top: 16px;
+}
+.profile-meta {
+  display: grid;
+  gap: 10px;
+}
+.profile-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px;
+  font-size: 0.78rem;
+  padding: 4px 0;
+}
+.profile-row > span:last-child {
+  color: var(--ink);
+}
+@media (max-width: 520px) {
+  .profile-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
 .about-photo-wrap {
   position: relative;
   border: 1px solid var(--line);
@@ -94,4 +118,57 @@
   max-width: 60ch;
   line-height: 1.6;
   font-size: 0.92rem;
+}
+
+.about-photo-wrap {
+  animation: photo-float 6.5s ease-in-out infinite;
+}
+.about-photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 35%, rgba(31,166,166,.1) 50%, transparent 65%);
+  transform: translateX(-110%);
+  animation: photo-glass 7s ease-in-out infinite;
+}
+@keyframes photo-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(.25deg); }
+}
+@keyframes photo-glass {
+  0%, 60% { transform: translateX(-110%); }
+  78%, 100% { transform: translateX(110%); }
+}
+.about-photo-tag { animation: tag-flicker 3.8s ease-in-out infinite; }
+@keyframes tag-flicker {
+  0%, 100% { opacity: .72; }
+  50% { opacity: 1; box-shadow: 0 0 14px rgba(31,166,166,.14); }
+}
+.timeline-item {
+  animation: timeline-in .75s var(--motion-ease) both;
+}
+.timeline-item:nth-child(1) { animation-delay: .1s; }
+.timeline-item:nth-child(2) { animation-delay: .22s; }
+.timeline-item:nth-child(3) { animation-delay: .34s; }
+.timeline-item:nth-child(4) { animation-delay: .46s; }
+@keyframes timeline-in {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.timeline-current .timeline-dot {
+  animation: current-beacon 2s ease-in-out infinite;
+}
+@keyframes current-beacon {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(31,166,166,.16); }
+  50% { box-shadow: 0 0 0 9px rgba(31,166,166,.03), 0 0 18px rgba(31,166,166,.28); }
+}
+.timeline-line {
+  background: linear-gradient(to bottom, var(--teal-deep), var(--line), var(--teal-deep));
+  background-size: 100% 220%;
+  animation: timeline-flow 4s linear infinite;
+}
+@keyframes timeline-flow {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
 }

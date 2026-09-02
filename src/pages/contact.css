@@ -50,3 +50,44 @@
 .social-tag:hover {
   background: rgba(31, 166, 166, 0.14);
 }
+
+.contact-panel {
+  animation: contact-panel-in .8s var(--motion-ease) .15s both;
+}
+@keyframes contact-panel-in {
+  from { opacity: 0; transform: translateY(16px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.field input,
+.field textarea {
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s var(--motion-ease);
+}
+.field input:focus,
+.field textarea:focus {
+  box-shadow: 0 0 0 3px rgba(31,166,166,.08), 0 8px 20px rgba(0,0,0,.12);
+  transform: translateY(-1px);
+}
+.social-tag {
+  position: relative;
+  overflow: hidden;
+  transition: background .25s ease, transform .25s var(--motion-ease), border-color .25s ease;
+}
+.social-tag::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  width: 22%;
+  left: -35%;
+  transform: skewX(-18deg);
+  background: rgba(31,166,166,.1);
+  animation: social-sweep 4.5s ease-in-out infinite;
+}
+.social-tag:hover { transform: translateY(-3px); }
+.social-tag:nth-child(2)::after { animation-delay: .8s; }
+.social-tag:nth-child(3)::after { animation-delay: 1.6s; }
+.social-tag:nth-child(4)::after { animation-delay: 2.4s; }
+@keyframes social-sweep {
+  0%, 60% { left: -35%; }
+  78%, 100% { left: 125%; }
+}

@@ -2,12 +2,13 @@ import { useState } from 'react'
 import './contact.css'
 
 // TODO: ganti dengan email/kontak asli kamu
-const CONTACT_EMAIL = 'fauzan@nexatechlabs.my.id'
+const CONTACT_EMAIL = 'ojann4318@gmail.com'
 
 const SOCIALS = [
-  { label: 'LinkedIn', href: '#' },
-  { label: 'GitHub', href: '#' },
-  { label: 'Instagram', href: '#' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/fauzanalfarikhi/in' },
+  { label: 'GitHub', href: 'https://github.com/Farikhi562' },
+  { label: 'Instagram', href: 'https://instagram.com/frikhiii' },
+  { label: 'Email', href: 'mailto:ojann4318@gmail.com' },
 ]
 
 export default function Contact() {
@@ -86,7 +87,7 @@ export default function Contact() {
         </div>
         <div className="socials">
           {SOCIALS.map((s) => (
-            <a key={s.label} href={s.href} className="tag tag-teal social-tag">
+            <a key={s.label} href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noreferrer' : undefined} className="tag tag-teal social-tag">
               {s.label}
             </a>
           ))}

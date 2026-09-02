@@ -8,12 +8,12 @@
   stroke-width: 1;
   stroke-dasharray: 4 5;
   opacity: 0;
-  animation: edge-in 0.6s ease forwards, edge-flow 5s linear infinite;
+  animation: edge-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards, edge-flow 7s linear infinite;
 }
 .node-dot {
   fill: var(--teal-bright);
   opacity: 0;
-  animation: node-in 0.5s ease forwards, node-pulse 3.4s ease-in-out infinite;
+  animation: node-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards, node-pulse 4.8s ease-in-out infinite;
 }
 @keyframes edge-in {
   to { opacity: 0.55; }
@@ -27,4 +27,37 @@
 @keyframes node-pulse {
   0%, 100% { r: 3; }
   50% { r: 4.5; }
+}
+
+.node-field {
+  animation: field-drift 9s ease-in-out infinite;
+  transform-origin: center;
+}
+.node-edge {
+  animation-name: edge-in, edge-flow, edge-breathe;
+  animation-duration: .9s, 7s, 3.6s;
+  animation-timing-function: cubic-bezier(0.22,1,0.36,1), linear, ease-in-out;
+  animation-iteration-count: 1, infinite, infinite;
+  animation-fill-mode: forwards, normal, normal;
+}
+.node-dot {
+  animation-name: node-in, node-pulse, node-orbit;
+  animation-duration: .7s, 4.8s, 8s;
+  animation-timing-function: cubic-bezier(0.22,1,0.36,1), ease-in-out, ease-in-out;
+  animation-iteration-count: 1, infinite, infinite;
+  animation-fill-mode: forwards, normal, normal;
+}
+@keyframes edge-breathe {
+  0%, 100% { opacity: .35; }
+  50% { opacity: .75; }
+}
+@keyframes field-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(3px, -4px) scale(1.008); }
+}
+@keyframes node-orbit {
+  0%, 100% { transform: translate(0,0); }
+  25% { transform: translate(2px,-2px); }
+  50% { transform: translate(-1px,2px); }
+  75% { transform: translate(-2px,-1px); }
 }

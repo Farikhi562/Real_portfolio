@@ -70,3 +70,31 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.company-logo {
+  animation: logo-float 5.5s ease-in-out infinite;
+  transition: transform .4s var(--motion-ease), box-shadow .3s ease;
+}
+.company-logo:hover { transform: translateY(-5px) rotate(-1deg) scale(1.03); box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+@keyframes logo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.client-card {
+  transition: transform .35s var(--motion-ease), border-color .3s ease, box-shadow .3s ease;
+}
+.client-card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,.18); }
+.product-row {
+  transition: transform .35s var(--motion-ease), border-color .3s ease, box-shadow .3s ease;
+}
+.product-row:hover { transform: translateX(6px); box-shadow: 0 12px 30px rgba(0,0,0,.18); }
+.product-logo {
+  transition: transform .45s var(--motion-ease), filter .35s ease;
+}
+.product-row:hover .product-logo { transform: rotate(-4deg) scale(1.06); filter: drop-shadow(0 0 10px rgba(31,166,166,.18)); }
+.product-badges .tag { animation: badge-in 1s var(--motion-ease) both; }
+.product-badges .tag:nth-child(2) { animation-delay: .12s; }
+@keyframes badge-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -28,6 +28,13 @@ const CHECKPOINTS = [
   },
 ]
 
+const PROFILE = [
+  ['name', 'Muhamad Fauzan Al Farikhi'],
+  ['experience', '1 year'],
+  ['university', 'Gunadarma University'],
+  ['gpa', '3.74 / 4.00'],
+]
+
 export default function About() {
   return (
     <div className="about">
@@ -41,9 +48,25 @@ export default function About() {
             Engineer diperbarui.
           </p>
         </div>
-        <div className="about-photo-wrap">
-          <img src="/assets/profile.jpg" alt="Foto profil Fauzan" className="about-photo" />
-          <div className="about-photo-tag mono">fauzan.ckpt</div>
+        <div>
+          <div className="about-photo-wrap">
+            <img src="/assets/profile.jpg" alt="Foto profil Fauzan" className="about-photo" />
+            <div className="about-photo-tag mono">fauzan.ckpt</div>
+          </div>
+          <div className="about-profile panel">
+            <div className="panel-header mono">
+              <span>model_metadata</span>
+              <span className="dim">verified</span>
+            </div>
+            <div className="profile-meta mono">
+              {PROFILE.map(([label, value]) => (
+                <div className="profile-row" key={label}>
+                  <span className="dim">{label}</span>
+                  <span>{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

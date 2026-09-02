@@ -15,8 +15,8 @@ export default function Home() {
             Membangun sistem,<br />bukan sekadar tugas kuliah.
           </h1>
           <p className="lead">
-            Fauzan — mahasiswa Informatika semester 3, arah karier ke AI Engineer /
-            Data Science. Merangkap Co-Founder &amp; CEO di{' '}
+            Muhamad Fauzan Al Farikhi — mahasiswa Informatika dengan 1 tahun pengalaman,
+            saat ini mengembangkan fokus ke AI Engineer / Data Science. Merangkap Co-Founder &amp; CEO di{' '}
             <Link to="/nexa" className="inline-link">NEXA Tech Labs</Link>, startup
             rintisan mahasiswa dengan klien aktif dan produk yang sudah bertanding
             di beberapa kompetisi nasional.
