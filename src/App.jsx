@@ -8,6 +8,7 @@ import Experiments from './pages/Experiments.jsx'
 import Playground from './pages/Playground.jsx'
 import SystemLogs from './pages/SystemLogs.jsx'
 import Contact from './pages/Contact.jsx'
+import News from './pages/News.jsx'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/playground" element={<Playground />} />
         <Route path="/logs" element={<SystemLogs />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/news" element={<News />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Shell>

@@ -4,6 +4,7 @@ import NodeField from '../components/NodeField.jsx'
 import '../components/terminal-boot.css'
 import '../components/node-field.css'
 import './home.css'
+import './news.css'
 
 export default function Home() {
   return (
@@ -33,6 +34,33 @@ export default function Home() {
 
       <section className="section">
         <TerminalBoot />
+      </section>
+
+      <section className="section home-news">
+        <div className="panel-header mono">
+          <span>news.feed</span>
+          <Link to="/news" className="dim news-open">open all ↗</Link>
+        </div>
+        <div className="news-marquee">
+          <div className="news-marquee-track">
+            {[
+              'NEXAIR / AI Innovation — development in progress',
+              'GEMASTIK / NEXA Campus — competition preparation',
+              'NEXA TECH LABS / products + active clients',
+              'PORTFOLIO / 1 year experience · IPK 3.74',
+              'NEXAIR / AI Innovation — development in progress',
+              'GEMASTIK / NEXA Campus — competition preparation',
+              'NEXA TECH LABS / products + active clients',
+              'PORTFOLIO / 1 year experience · IPK 3.74',
+            ].map((item, i) => (
+              <div className="news-chip" key={i}>
+                <span className="news-chip-dot signal" />
+                <span className="news-chip-title">{item}</span>
+                <span className="news-chip-arrow">↗</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="section">

@@ -7,4 +7,5 @@ export const NAV = [
   { path: '/playground', file: 'playground.jsx', label: 'Playground', folder: 'company' },
   { path: '/logs', file: 'system.log', label: 'System Logs', folder: 'root' },
   { path: '/contact', file: 'contact.jsx', label: 'Deploy', folder: 'root' },
+  { path: '/news', file: 'news.jsx', label: 'News', folder: 'root' },
 ]
