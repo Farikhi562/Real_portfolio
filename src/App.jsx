@@ -10,6 +10,7 @@ import SystemLogs from './pages/SystemLogs.jsx'
 import Contact from './pages/Contact.jsx'
 import News from './pages/News.jsx'
 import Nexair from './pages/Nexair.jsx'
+import NexaSphere from './pages/NexaSphere.jsx'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/news" element={<News />} />
         <Route path="/nexair" element={<Nexair />} />
+        <Route path="/nexa-sphere" element={<NexaSphere />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Shell>

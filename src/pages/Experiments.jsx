@@ -96,9 +96,9 @@ export default function Experiments() {
               <span className="tag tag-teal">ICBC</span>
             </div>
             <p className="dim" style={{ margin: 0 }}>
-              AI &amp; Cloud DevOps platform — masuk top 4 Business Canvas
-              Udinus. Detail lengkap ada di halaman NEXA Tech Labs.
+              AI-powered ERP / Business Intelligence for MSMEs — menghubungkan data bisnis, external intelligence, forecasting, dan decision support.
             </p>
+            <div style={{ marginTop: 8 }}><Link className="btn btn-ghost" to="/nexa-sphere">open_case_study →</Link></div>
           </div>
           <div className="panel other-exp">
             <div className="panel-header mono">

@@ -56,3 +56,10 @@ Hasil build ada di folder `dist/` — itu yang di-upload ke hosting.
 
 Paling gampang pakai Vercel atau Netlify — drag-drop folder ini (setelah
 `npm install`) atau connect ke repo GitHub, framework preset "Vite".
+
+## Added in this update
+- NEXA Sphere case study at `/nexa-sphere`
+- Interactive business-intelligence dashboard visual
+- Demand forecast sparkline, inventory risk ring, AI recommendation strip
+- Business Data → External Intelligence → AI Analysis → Action narrative
+- NEXA Sphere added to navigation and Experiments case-study CTA
