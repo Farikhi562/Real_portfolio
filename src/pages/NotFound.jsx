@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import EmberField from '../components/EmberField.jsx'
+import Seo from '../components/Seo.jsx'
 import { NAV } from '../nav.js'
 import './not-found.css'
 
@@ -8,6 +9,7 @@ export default function NotFound() {
 
   return (
     <div className="not-found">
+      <Seo title="404" description="Halaman tidak ditemukan." path={location.pathname} noIndex />
       <EmberField count={14} variant="vivid" className="nf-ember" />
       <section className="section nf-hero">
         <p className="kicker">// 404.exception</p>

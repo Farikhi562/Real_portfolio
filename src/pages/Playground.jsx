@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import EmberField from '../components/EmberField.jsx'
+import Seo from '../components/Seo.jsx'
 import './playground.css'
 
 // Estimasi sederhana dispersi Gaussian plume, stabilitas atmosfer kelas netral (D).
@@ -75,6 +76,11 @@ export default function Playground() {
 
   return (
     <div className="playground">
+      <Seo
+        title="Playground"
+        description="Simulasi interaktif dispersi asap Gaussian plume — coba sendiri bagaimana intensitas kebakaran, angin, dan jarak memengaruhi estimasi PM2.5."
+        path="/playground"
+      />
       <section className="section">
         <p className="kicker">// playground.jsx</p>
         <h1 className="page-title">Playground</h1>

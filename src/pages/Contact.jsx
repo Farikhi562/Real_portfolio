@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import Seo from '../components/Seo.jsx'
 import './contact.css'
 
 // TODO: ganti dengan email/kontak asli kamu
@@ -75,6 +76,11 @@ export default function Contact() {
 
   return (
     <div className="contact">
+      <Seo
+        title="Kontak"
+        description="Hubungi Muhamad Fauzan Al Farikhi — Co-Founder & CEO NEXA Tech Labs — untuk kolaborasi, peluang kerja, atau diskusi proyek NEXA."
+        path="/contact"
+      />
       <section className="section">
         <p className="kicker">// contact.jsx</p>
         <h1 className="page-title">Deploy</h1>

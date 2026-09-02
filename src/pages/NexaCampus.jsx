@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Seo from '../components/Seo.jsx'
 import './nexa-campus.css'
 
 const tasks = [
@@ -29,8 +30,44 @@ function CampusDemo(){
   </div>
 }
 
+function TelegramNotifDemo(){
+  return <div className="telegram-demo panel">
+    <div className="campus-demo-bar mono"><span>nexa_campus / telegram_bot.notify()</span><span><i className="campus-live"/> BOT ACTIVE</span></div>
+    <div className="telegram-stage">
+      <div className="tg-phone">
+        <div className="tg-phone-notch"/>
+        <div className="tg-statusbar mono"><span>9:41</span><span>●●● 5G 100%</span></div>
+        <div className="tg-lockscreen">
+          <span className="tg-clock">09:41</span>
+          <span className="tg-date">Kamis, 3 September</span>
+        </div>
+        <div className="tg-notif tg-notif-a">
+          <div className="tg-notif-icon">✈</div>
+          <div className="tg-notif-body">
+            <div className="tg-notif-top"><b>NEXA Campus Bot</b><span>now</span></div>
+            <p>⏰ Deadline reminder: <b>ML Assignment</b> jatuh tempo dalam 4 jam 12 menit.</p>
+          </div>
+        </div>
+        <div className="tg-notif tg-notif-b">
+          <div className="tg-notif-icon">✈</div>
+          <div className="tg-notif-body">
+            <div className="tg-notif-top"><b>NEXA Campus Bot</b><span>now</span></div>
+            <p>📌 UI Prototype ditambahkan ke jadwal besok, 23:59.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="campus-visual-foot mono" style={{position:'relative'}}><span>telegram_integration / demo</span><span className="dim">push notification simulation</span></div>
+  </div>
+}
+
 export default function NexaCampus(){
  return <div className="campus-page">
+   <Seo
+     title="NEXA Campus"
+     description="NEXA Campus — platform produktivitas mahasiswa yang menyatukan tugas, deadline, dan info kampus, lengkap dengan notifikasi pengingat via Telegram."
+     path="/nexa-campus"
+   />
    <section className="campus-hero section">
      <div className="campus-hero-copy">
        <p className="kicker">// nexa_campus.case_study</p>
@@ -55,6 +92,12 @@ export default function NexaCampus(){
     <div className="section-heading"><div><p className="kicker">// the_approach</p><h2 className="section-title">Student Needs → Centralized Information → Smart Organization → Action</h2></div><span className="mono dim">campus.pipeline / v1</span></div>
     <div className="campus-flow"><div className="flow-track"/>{[['01','STUDENT NEEDS','Understand the real workflow.'],['02','CENTRALIZED INFO','Bring essential context together.'],['03','SMART ORGANIZATION','Prioritize what matters next.'],['04','ACTION','Turn clarity into progress.']].map(([n,t,d])=><article className="flow-node panel" key={n}><span className="mono">{n}</span><div className="flow-icon">{['⌁','▦','✦','→'][Number(n)-1]}</div><h3>{t}</h3><p className="dim">{d}</p></article>)}</div>
     <div className="feature-grid">{[['ACADEMIC TASKS','Organize assignments, deadlines, and academic responsibilities in one place.'],['DEADLINE INTELLIGENCE','Turn scattered deadlines into a clear timeline of what needs attention.'],['CAMPUS INFORMATION','Bring relevant campus activities and information into a student-oriented experience.'],['PERSONAL DASHBOARD','Give students an at-a-glance view of upcoming tasks and priorities.'],['USER VALIDATION','Validate product direction through early student feedback and real responses.']].map(([t,d],i)=><article className="feature-card panel" key={t}><span className="mono">0{i+1}</span><h3>{t}</h3><p className="dim">{d}</p><i/></article>)}</div>
+   </section>
+
+   <section className="section campus-telegram">
+    <div className="section-heading"><div><p className="kicker">// contoh_visualisasi</p><h2 className="section-title">Deadlines follow you into chat, not just the app.</h2></div><span className="mono dim">telegram.notify / v1</span></div>
+    <p className="lead body-copy" style={{marginBottom:'18px'}}>Simulasi bagaimana NEXA Campus mendorong pengingat deadline langsung ke Telegram, supaya mahasiswa tidak perlu buka aplikasi dulu untuk tahu ada tugas yang mendekati jatuh tempo.</p>
+    <TelegramNotifDemo/>
    </section>
 
    <section className="section campus-result" id="result">

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Seo from '../components/Seo.jsx'
 import './company.css'
 
 const CLIENTS = ['Dimsum Mentai Kmyrn', 'Citcha Studio Photobox']
@@ -29,6 +30,11 @@ const PRODUCTS = [
 export default function Company() {
   return (
     <div className="company">
+      <Seo
+        title="NEXA Tech Labs"
+        description="NEXA Tech Labs — startup rintisan mahasiswa di balik NEXAIR, NEXA Campus, dan NEXA-Sphere, dipimpin oleh Fauzan sebagai Co-Founder & CEO."
+        path="/nexa"
+      />
       <section className="section company-hero">
         <img src="/assets/logo-nexa-tech-labs.png" alt="Logo NEXA Tech Labs" className="company-logo" />
         <div>

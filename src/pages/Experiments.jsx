@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import EmberField from '../components/EmberField.jsx'
+import Seo from '../components/Seo.jsx'
 import './experiments.css'
 
 const STAGES = [
@@ -26,6 +27,11 @@ const STAGES = [
 export default function Experiments() {
   return (
     <div className="experiments">
+      <Seo
+        title="Experiments"
+        description="NEXAIR sebagai eksperimen riset — dari deteksi hotspot kebakaran, pemodelan sebaran asap, sampai prediksi PM2.5 dengan machine learning."
+        path="/experiments"
+      />
       <section className="section">
         <p className="kicker">// experiments.jsx</p>
         <h1 className="page-title">Experiments</h1>

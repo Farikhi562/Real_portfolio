@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import TerminalBoot from '../components/TerminalBoot.jsx'
 import NodeField from '../components/NodeField.jsx'
+import Seo from '../components/Seo.jsx'
 import '../components/terminal-boot.css'
 import '../components/node-field.css'
 import './home.css'
@@ -9,6 +10,11 @@ import './news.css'
 export default function Home() {
   return (
     <div className="home">
+      <Seo
+        title="Home"
+        description="Fauzan — mahasiswa Informatika, AI Engineer in training, Co-Founder & CEO NEXA Tech Labs. Membangun NEXAIR, NEXA Campus, dan NEXA Sphere."
+        path="/"
+      />
       <section className="section hero-grid">
         <div>
           <p className="kicker">// portfolio.init()</p>

@@ -3,3 +3,16 @@
 @media(max-width:1000px){.sphere-hero,.beyond-sphere,.sphere-vision{grid-template-columns:1fr}.sphere-hero{min-height:auto}.sphere-copy{padding-top:20px}.sphere-visual{min-height:500px}.sphere-approach-grid{grid-template-columns:repeat(2,1fr)}.dashboard-main{grid-template-columns:1fr}.risk-panel{border-top:1px solid var(--line)}}
 @media(max-width:680px){.sphere-approach-grid,.result-words,.dashboard-metrics{grid-template-columns:1fr}.dash-metric{border-right:0;border-bottom:1px solid var(--line)}.dash-metric:last-child{border-bottom:0}.sphere-visual{min-height:420px}.sphere-copy h1{font-size:clamp(4rem,23vw,7rem)}.sphere-question{flex-direction:column;gap:8px}.sphere-question strong{text-align:left}.dashboard-feed{align-items:flex-start;flex-wrap:wrap}.dashboard-feed strong{width:100%}}
 @media(prefers-reduced-motion:reduce){.sphere-orbit img,.orbit,.orbit-node,.sphere-beam,.result-word:after,.sphere-line,.sphere-visual:before,.sphere-vision:after,.live-dot,.feed-pulse{animation:none}.sphere-line{stroke-dashoffset:0}}
+.signal-intake{padding:0;overflow:hidden;background:linear-gradient(145deg,rgba(255,68,51,.05),var(--panel) 40%)}
+.signal-stage{position:relative;padding:18px}
+.signal-stage svg{display:block;width:100%;height:auto}
+.signal-path{fill:none;stroke:rgba(255,138,99,.28);stroke-width:1.5;stroke-dasharray:4 5}
+.signal-dot{fill:var(--ember-bright);filter:drop-shadow(0 0 6px rgba(255,68,51,.7))}
+.signal-hub-ring{fill:none;stroke:rgba(63,214,200,.4);stroke-width:1.5;animation:sphere-glow 4s ease-in-out infinite}
+.signal-hub-core{fill:#111118;stroke:var(--ember-bright);stroke-width:1.5}
+.signal-hub-text{fill:var(--ink);font:600 12px var(--font-mono)}
+.signal-node-label{position:absolute;transform:translate(-50%,-50%);display:grid;gap:2px;text-align:center;padding:6px 9px;border:1px solid var(--line-strong);background:rgba(9,9,12,.82);font-size:.56rem;white-space:nowrap}
+.signal-node-label b{color:var(--ember-bright);font-size:.62rem}
+.signal-node-label span{color:var(--ink-faint)}
+@media(max-width:680px){.signal-node-label{font-size:.5rem;padding:4px 6px}.signal-node-label b{font-size:.56rem}}
+@media(prefers-reduced-motion:reduce){.signal-dot{animation:none}.signal-hub-ring{animation:none}}

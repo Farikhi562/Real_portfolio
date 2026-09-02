@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Seo from '../components/Seo.jsx'
 import './nexa-sphere.css'
 
 const demand = [42,48,45,58,55,67,73,69,82,78,91,96]
@@ -44,8 +45,65 @@ function Dashboard() {
   </div>
 }
 
+const SIGNAL_NODES = [
+  { id: 'weather', label: 'CUACA', sub: 'curah hujan & suhu', x: 80, y: 56, delay: '0s' },
+  { id: 'calendar', label: 'KALENDER', sub: 'musim & hari besar', x: 560, y: 56, delay: '.9s' },
+  { id: 'inflation', label: 'INFLASI', sub: 'daya beli pasar', x: 80, y: 264, delay: '1.8s' },
+  { id: 'sales', label: 'PENJUALAN', sub: 'data operasional internal', x: 560, y: 264, delay: '2.7s' },
+]
+
+function pct(v, total) {
+  return `${(v / total) * 100}%`
+}
+
+function SignalIntake() {
+  return (
+    <div className="signal-intake panel">
+      <div className="dashboard-bar mono"><span>nexa_sphere / signal_intake.ai</span><span><i className="live-dot" /> INGESTING</span></div>
+      <div className="signal-stage">
+        <svg viewBox="0 0 640 320" role="img" aria-label="Diagram sinyal eksternal mengalir menuju mesin AI NEXA Sphere">
+          {SIGNAL_NODES.map((n) => (
+            <path
+              key={n.id}
+              id={`sig-path-${n.id}`}
+              className="signal-path"
+              d={`M ${n.x} ${n.y} C ${320 + (n.x - 320) * 0.35} ${160 + (n.y - 160) * 0.35}, ${320 + (n.x - 320) * 0.12} ${160 + (n.y - 160) * 0.12}, 320 160`}
+            />
+          ))}
+          {SIGNAL_NODES.map((n) => (
+            <circle key={`dot-${n.id}`} r="4" className="signal-dot" style={{ animationDelay: n.delay }}>
+              <animateMotion dur="3.6s" repeatCount="indefinite" begin={n.delay}>
+                <mpath href={`#sig-path-${n.id}`} xlinkHref={`#sig-path-${n.id}`} />
+              </animateMotion>
+            </circle>
+          ))}
+          <circle cx="320" cy="160" r="34" className="signal-hub-ring" />
+          <circle cx="320" cy="160" r="22" className="signal-hub-core" />
+          <text x="320" y="164" textAnchor="middle" className="signal-hub-text">AI</text>
+        </svg>
+        {SIGNAL_NODES.map((n) => (
+          <div
+            key={`label-${n.id}`}
+            className="signal-node-label mono"
+            style={{ left: pct(n.x, 640), top: pct(n.y, 320) }}
+          >
+            <b>{n.label}</b>
+            <span>{n.sub}</span>
+          </div>
+        ))}
+      </div>
+      <div className="dashboard-feed mono"><span>SIGNAL FUSION</span><strong>Menggabungkan sinyal eksternal dengan data operasional secara berkelanjutan.</strong><span className="feed-pulse" /></div>
+    </div>
+  )
+}
+
 export default function NexaSphere() {
   return <div className="sphere-page">
+    <Seo
+      title="NEXA Sphere"
+      description="NEXA Sphere — lapisan AI-powered ERP untuk UMKM yang menggabungkan data operasional dengan sinyal eksternal (cuaca, inflasi, kalender) demi keputusan inventori yang lebih cerdas."
+      path="/nexa-sphere"
+    />
     <section className="section sphere-hero">
       <div className="sphere-copy">
         <p className="kicker">// nexa_sphere.case_study</p>
@@ -82,6 +140,12 @@ export default function NexaSphere() {
           ['05','Decision Support','Translate complex signals into practical recommendations business owners can act on.'],
         ].map(([n,t,d])=><article className="sphere-card panel" key={n}><span className="sphere-number mono">{n}</span><h3>{t}</h3><p className="dim">{d}</p><div className="sphere-beam"/></article>)}
       </div>
+    </section>
+
+    <section className="section sphere-signal-section">
+      <div className="section-heading"><div><p className="kicker">// contoh_visualisasi</p><h2 className="section-title">External context, flowing into one engine.</h2></div><span className="mono dim">signal_intake.v1</span></div>
+      <p className="lead body-copy" style={{ marginBottom: '18px' }}>Ilustrasi bagaimana sinyal dari luar bisnis — cuaca, kalender, inflasi — mengalir bersama data penjualan internal ke satu mesin AI yang sama untuk diproses menjadi rekomendasi.</p>
+      <SignalIntake />
     </section>
 
     <section className="section" id="result">

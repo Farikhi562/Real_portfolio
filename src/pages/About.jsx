@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import EmberField from '../components/EmberField.jsx'
+import Seo from '../components/Seo.jsx'
 import './about.css'
 
 const CHECKPOINTS = [
@@ -54,6 +55,11 @@ const IN_TRAINING = [
 export default function About() {
   return (
     <div className="about">
+      <Seo
+        title="Tentang"
+        description="Perjalanan Muhamad Fauzan Al Farikhi — dari mahasiswa Informatika Universitas Gunadarma menjadi Co-Founder & CEO NEXA Tech Labs."
+        path="/about"
+      />
       <section className="section about-hero">
         <EmberField count={12} variant="ambient" className="about-ember" />
         <div>

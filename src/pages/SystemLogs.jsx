@@ -1,3 +1,4 @@
+import Seo from '../components/Seo.jsx'
 import './system-logs.css'
 
 const LOGS = [
@@ -13,6 +14,11 @@ const LOGS = [
 export default function SystemLogs() {
   return (
     <div className="system-logs">
+      <Seo
+        title="System Logs"
+        description="Changelog perjalanan Fauzan — dari mahasiswa Informatika, mendirikan NEXA Tech Labs, sampai membangun NEXAIR, NEXA Campus, dan NEXA-Sphere."
+        path="/logs"
+      />
       <section className="section">
         <p className="kicker">// system.log</p>
         <h1 className="page-title">System Logs</h1>
@@ -28,13 +34,15 @@ export default function SystemLogs() {
 
       <section className="section">
         <div className="panel log-panel mono">
-          {LOGS.map((log) => (
-            <div className={`log-row ${log.current ? 'log-current' : ''}`} key={log.v}>
-              <span className="log-version">{log.v}</span>
-              <span className="log-text">{log.text}</span>
-              {log.current && <span className="tag tag-signal log-tag">HEAD</span>}
-            </div>
-          ))}
+          <div className="log-rows">
+            {LOGS.map((log) => (
+              <div className={`log-row ${log.current ? 'log-current' : ''}`} key={log.v}>
+                <span className="log-version">{log.v}</span>
+                <span className="log-text">{log.text}</span>
+                {log.current && <span className="tag tag-signal log-tag">HEAD</span>}
+              </div>
+            ))}
+          </div>
           <div className="log-tail mono dim">
             <span className="log-tail-caret">$</span> watching for next commit<span className="log-tail-cursor">▌</span>
           </div>

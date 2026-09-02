@@ -3,6 +3,7 @@ import './news-lightbox.css'
 
 export default function NewsLightbox({ story, imageIndex, onClose, onSetImageIndex }) {
   const total = story?.images?.length || 0
+  const activeImage = total > 0 ? story.images[imageIndex] : null
 
   const next = useCallback(() => {
     if (!total) return
@@ -40,11 +41,11 @@ export default function NewsLightbox({ story, imageIndex, onClose, onSetImageInd
         </button>
 
         <div className="lightbox-media">
-          {total > 0 && (
+          {activeImage && (
             <img
-              key={story.images[imageIndex]}
-              src={story.images[imageIndex]}
-              alt={`${story.title} — dokumentasi ${imageIndex + 1}/${total}`}
+              key={activeImage.src}
+              src={activeImage.src}
+              alt={`${story.title} — ${activeImage.caption || `dokumentasi ${imageIndex + 1}/${total}`}`}
             />
           )}
           {total > 1 && (
@@ -54,17 +55,20 @@ export default function NewsLightbox({ story, imageIndex, onClose, onSetImageInd
               <div className="lightbox-counter mono">{imageIndex + 1} / {total}</div>
             </>
           )}
+          {activeImage?.caption && (
+            <p className="lightbox-image-caption mono">{activeImage.caption}</p>
+          )}
         </div>
 
         {total > 1 && (
           <div className="lightbox-thumbs">
-            {story.images.map((src, i) => (
+            {story.images.map((img, i) => (
               <button
-                key={src}
+                key={img.src}
                 className={`lightbox-thumb ${i === imageIndex ? 'active' : ''}`}
                 onClick={() => onSetImageIndex(i)}
               >
-                <img src={src} alt="" loading="lazy" />
+                <img src={img.src} alt="" loading="lazy" />
               </button>
             ))}
           </div>

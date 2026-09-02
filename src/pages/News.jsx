@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EmberField from '../components/EmberField.jsx'
 import NewsLightbox from '../components/NewsLightbox.jsx'
+import Seo from '../components/Seo.jsx'
 import './news.css'
 
 const NEWS = [
@@ -19,7 +20,10 @@ const STORIES = [
     id: '01', tag: 'NEXAIR / BUILD LOG', date: 'AUG 2026', title: 'Building NEXAIR',
     text: 'Dokumentasi proses pengembangan NEXAIR: eksplorasi data, pemodelan prediksi, pengujian visualisasi, dan iterasi sistem untuk membaca pola kebakaran serta kualitas udara.',
     detail: 'Dokumentasi proses pengembangan NEXAIR dari sisi riset ke produk: eksplorasi data titik panas dan kualitas udara, iterasi pemodelan prediksi, sampai pengujian visualisasi Gaussian plume yang dipakai di halaman Playground. Fokusnya membaca pola sebaran asap dan risiko kebakaran secara lebih terbaca untuk pengambil keputusan, bukan sekadar angka mentah.',
-    images: ['/assets/news/nexair-process-01.jpg', '/assets/news/nexair-process-02.jpg'],
+    images: [
+      { src: '/assets/news/nexair-process-01.jpg', caption: 'Eksplorasi data titik panas & kualitas udara sebelum masuk tahap pemodelan.' },
+      { src: '/assets/news/nexair-process-02.jpg', caption: 'Pengujian visualisasi sebaran asap (Gaussian plume) di atas simulasi peta.' },
+    ],
     featured: true,
     category: 'nexair',
   },
@@ -27,7 +31,9 @@ const STORIES = [
     id: '02', tag: 'GEMASTIK XIX', date: 'AUG 2026', title: 'Officially listed as Gunadarma delegate',
     text: 'Nama Muhamad Fauzan Al Farikhi tercantum dalam pengumuman resmi Universitas Gunadarma sebagai Delegasi Divisi XI Pengembangan Bisnis TIK — hasil seleksi internal Gelombang III.',
     detail: 'Nama Muhamad Fauzan Al Farikhi tercantum dalam pengumuman resmi Universitas Gunadarma sebagai Delegasi Divisi XI Pengembangan Bisnis TIK untuk Gemastik XIX 2026, hasil seleksi internal Gelombang III. NEXA Campus maju sebagai produk yang dibawa tim, dikerjakan bersama Mirza Danisywar Noor Wahyu dan Rangga Dwi Prasetyo.',
-    images: ['/assets/news/gemastik-delegation.jpg'],
+    images: [
+      { src: '/assets/news/gemastik-delegation.jpg', caption: 'Pengumuman resmi delegasi Universitas Gunadarma untuk Gemastik XIX 2026.' },
+    ],
     link: 'https://kemahasiswaan.gunadarma.ac.id/pengumuman-penetapan-delegasi-universitas-gunadarma-pada-gemastik-tahun-2026-hasil-seleksi-internal-gelombang-iii',
     category: 'competition',
   },
@@ -35,14 +41,20 @@ const STORIES = [
     id: '03', tag: 'GIEF 2026 / EXHIBITION', date: '22–23 JUL 2026', title: 'NEXA Campus goes on display',
     text: 'NEXA Campus Ecosystem dipresentasikan sebagai bagian dari pameran produk inovasi mahasiswa berbasis teknologi digital dan standardisasi di Gunadarma Industrial Engineering Fair 2026.',
     detail: 'NEXA Campus Ecosystem dipresentasikan sebagai bagian dari pameran produk inovasi mahasiswa berbasis teknologi digital dan standardisasi di 8th Gunadarma Industrial Engineering Fair (GIEF) 2026 — kesempatan untuk menunjukkan produk langsung ke pengunjung pameran, bukan cuma di atas slide.',
-    images: ['/assets/news/gief-nexa-campus-01.jpg', '/assets/news/gief-nexa-campus-02.jpg', '/assets/news/gief-nexa-campus-03.jpg'],
+    images: [
+      { src: '/assets/news/gief-nexa-campus-01.jpg', caption: 'Booth NEXA Campus di 8th Gunadarma Industrial Engineering Fair (GIEF) 2026.' },
+      { src: '/assets/news/gief-nexa-campus-02.jpg', caption: 'Sesi demo produk langsung ke pengunjung pameran.' },
+      { src: '/assets/news/gief-nexa-campus-03.jpg', caption: 'Diskusi dengan pengunjung mengenai fitur NEXA Campus Ecosystem.' },
+    ],
     category: 'exhibition',
   },
   {
     id: '04', tag: 'BUSINESS PLAN COMPETITION', date: '2026', title: 'Zero to Cash',
     text: 'Sertifikat apresiasi atas partisipasi dalam Business Plan Competition HIMAMEN Gunadarma dengan tema “Transforming Ideas into Real Business Execution”.',
     detail: 'Sertifikat apresiasi atas partisipasi dalam Business Plan Competition “Zero to Cash” yang diselenggarakan HIMAMEN Gunadarma, mengangkat tema “Transforming Ideas into Real Business Execution” — latihan menyusun ide bisnis jadi rencana yang bisa dieksekusi, bukan cuma wacana di atas kertas.',
-    images: ['/assets/news/business-plan-certificate.png'],
+    images: [
+      { src: '/assets/news/business-plan-certificate.png', caption: 'Sertifikat apresiasi Business Plan Competition “Zero to Cash” — HIMAMEN Gunadarma.' },
+    ],
     category: 'competition',
   },
   {
@@ -50,10 +62,10 @@ const STORIES = [
     text: 'Certificate of Achievement sebagai Finalist dalam International Canvas Business Competition (ICBC) dengan tema “Digital Business Ecosystem for Global Market Expansion”.',
     detail: 'Certificate of Achievement sebagai Finalist dalam International Canvas Business Competition (ICBC) dengan tema “Digital Business Ecosystem for Global Market Expansion”. Babak final berupa sesi pitching langsung di hadapan dewan juri dengan waktu presentasi berjalan real-time — memaparkan progres model bisnis dan traksi awal di depan panel penilai.',
     images: [
-      '/assets/news/icbc-certificate.jpg',
-      '/assets/news/icbc-final-presentation-01.jpg',
-      '/assets/news/icbc-final-presentation-02.jpg',
-      '/assets/news/icbc-final-presentation-03.jpg',
+      { src: '/assets/news/icbc-certificate.jpg', caption: 'Certificate of Achievement — Finalist International Canvas Business Competition (ICBC).' },
+      { src: '/assets/news/icbc-final-presentation-01.jpg', caption: 'Sesi pitching final di hadapan dewan juri ICBC.' },
+      { src: '/assets/news/icbc-final-presentation-02.jpg', caption: 'Presentasi progres model bisnis dan traksi awal.' },
+      { src: '/assets/news/icbc-final-presentation-03.jpg', caption: 'Sesi tanya-jawab dengan panel penilai di babak final.' },
     ],
     category: 'competition',
   },
@@ -66,12 +78,15 @@ const FILTERS = [
   { id: 'exhibition', label: 'Pameran' },
 ]
 
-function Photo({ src, alt, className = '', onOpen }) {
+function Photo({ src, alt, caption, className = '', onOpen }) {
   return (
-    <button type="button" className={`news-photo ${className}`} onClick={onOpen} aria-label={`Perbesar: ${alt}`}>
-      <img src={src} alt={alt} loading="lazy" />
-      <span className="news-photo-zoom mono">⤢ perbesar</span>
-    </button>
+    <figure className={`news-photo-figure ${className}`}>
+      <button type="button" className="news-photo" onClick={onOpen} aria-label={`Perbesar: ${alt}`}>
+        <img src={src} alt={alt} loading="lazy" />
+        <span className="news-photo-zoom mono">⤢ perbesar</span>
+      </button>
+      {caption && <figcaption className="news-photo-caption dim">{caption}</figcaption>}
+    </figure>
   )
 }
 
@@ -96,6 +111,11 @@ export default function News() {
 
   return (
     <div className="news-page">
+      <Seo
+        title="News"
+        description="Signal & update dari Fauzan × NEXA Tech Labs — build log NEXAIR, dokumentasi kompetisi, pameran, dan milestone terbaru."
+        path="/news"
+      />
       <section className="section news-hero">
         <EmberField count={16} variant="vivid" className="news-ember" />
         <div>
@@ -178,11 +198,12 @@ export default function News() {
                 </div>
               </div>
               <div className={`story-gallery gallery-${story.images.length}`}>
-                {story.images.map((src, imageIndex) => (
+                {story.images.map((img, imageIndex) => (
                   <Photo
-                    key={src}
-                    src={src}
-                    alt={`${story.title} documentation ${imageIndex + 1}`}
+                    key={img.src}
+                    src={img.src}
+                    caption={img.caption}
+                    alt={`${story.title} — ${img.caption || `dokumentasi ${imageIndex + 1}`}`}
                     onOpen={() => openStory(story.id, imageIndex)}
                   />
                 ))}
