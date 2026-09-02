@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './experiments.css'
 
 const STAGES = [
@@ -79,6 +80,9 @@ export default function Experiments() {
                 {i < STAGES.length - 1 && <span className="stage-connector" aria-hidden="true" />}
               </div>
             ))}
+          </div>
+          <div style={{ marginTop: 18 }}>
+            <Link className="btn" to="/nexair">open_nexair_case_study →</Link>
           </div>
         </div>
       </section>
