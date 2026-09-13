@@ -3,11 +3,14 @@ import EmberField from '../components/EmberField.jsx'
 import Seo from '../components/Seo.jsx'
 import './nexair.css'
 
-const DATA = [0.78,0.92,0.86,1.08,1.22,1.15,1.31,1.24,1.42,1.34,1.52,1.46,1.61,1.55,1.68,1.58,1.73,1.66,1.82,1.74,1.88,1.79,1.96,1.86]
-const BASELINE = [0.82,0.9,0.88,1.03,1.17,1.18,1.26,1.28,1.38,1.37,1.48,1.5,1.56,1.6,1.66,1.68,1.73,1.76,1.81,1.84,1.89,1.91,1.96,1.99]
+// Real numbers from outputs/evaluation/metrics.csv (TEST split, 2025 holdout).
+// C_proxy is a z-scored PM2.5 signal, not a physical concentration — MAE is
+// reported on that scale, not µg/m³.
+const HORIZONS = [2, 4, 6, 8, 12]
+const E0_PERSISTENCE = [0.039, 0.065, 0.084, 0.097, 0.111]
+const E1_GAUSSIAN = [0.196, 0.196, 0.196, 0.196, 0.196]
 
-function linePath(values, width = 920, height = 300, pad = 28) {
-  const min = 0.65, max = 2.1
+function linePath(values, width = 920, height = 300, pad = 28, min = 0, max = 0.22) {
   return values.map((v, i) => {
     const x = pad + (i / (values.length - 1)) * (width - pad * 2)
     const y = height - pad - ((v - min) / (max - min)) * (height - pad * 2)
@@ -16,28 +19,29 @@ function linePath(values, width = 920, height = 300, pad = 28) {
 }
 
 function Chart() {
-  const modelPath = linePath(DATA)
-  const basePath = linePath(BASELINE)
-  const points = DATA.map((v, i) => {
-    const x = 28 + (i / (DATA.length - 1)) * (920 - 56)
-    const y = 300 - 28 - ((v - .65) / (2.1 - .65)) * (300 - 56)
-    return { x, y, v, hour: i + 1 }
+  const min = 0, max = 0.22
+  const e0Path = linePath(E0_PERSISTENCE, 920, 300, 28, min, max)
+  const e1Path = linePath(E1_GAUSSIAN, 920, 300, 28, min, max)
+  const points = E0_PERSISTENCE.map((v, i) => {
+    const x = 28 + (i / (HORIZONS.length - 1)) * (920 - 56)
+    const y = 300 - 28 - ((v - min) / (max - min)) * (300 - 56)
+    return { x, y, v, h: HORIZONS[i] }
   })
   return (
     <div className="nexair-chart panel">
-      <div className="chart-top mono"><span>pm2.5 / test_set</span><span className="dim">24 points · 1h horizon</span></div>
-      <svg viewBox="0 0 920 300" role="img" aria-label="Interactive PM2.5 forecast chart">
-        {[0.75,1,1.25,1.5,1.75,2].map(v => {
-          const y = 300 - 28 - ((v - .65) / (2.1 - .65)) * (300 - 56)
+      <div className="chart-top mono"><span>c_proxy mae / test_set</span><span className="dim">5 horizons · 2h–12h ahead</span></div>
+      <svg viewBox="0 0 920 300" role="img" aria-label="Grafik MAE E0 Persistence vs E1 Gaussian Plume pada test set">
+        {[0.05, 0.1, 0.15, 0.2].map(v => {
+          const y = 300 - 28 - ((v - min) / (max - min)) * (300 - 56)
           return <line key={v} x1="28" x2="892" y1={y} y2={y} className="chart-grid" />
         })}
-        <path d={basePath} className="chart-baseline" />
-        <path d={modelPath} className="chart-model" />
-        {points.map(p => <circle key={p.hour} cx={p.x} cy={p.y} r="4" className="chart-point"><title>{`Hour +${p.hour}: ${p.v.toFixed(2)} µg/m³`}</title></circle>)}
-        <text x="28" y="288" className="chart-axis">+1h</text>
-        <text x="860" y="288" className="chart-axis">+24h</text>
+        <path d={e1Path} className="chart-baseline" />
+        <path d={e0Path} className="chart-model" />
+        {points.map(p => <circle key={p.h} cx={p.x} cy={p.y} r="4" className="chart-point"><title>{`+${p.h}h: MAE ${p.v.toFixed(3)} (z-score)`}</title></circle>)}
+        <text x="28" y="288" className="chart-axis">+2h</text>
+        <text x="860" y="288" className="chart-axis">+12h</text>
       </svg>
-      <div className="chart-legend mono"><span><i className="legend-model" /> HGB model</span><span><i className="legend-base" /> persistence baseline</span></div>
+      <div className="chart-legend mono"><span><i className="legend-model" /> E0 persistence</span><span><i className="legend-base" /> E1 gaussian plume (calibrated)</span></div>
     </div>
   )
 }
@@ -172,7 +176,7 @@ export default function Nexair() {
             ['01','FIRMS Hotspots','Detect fire activity and estimate emission intensity.'],
             ['02','Weather','Capture wind, temperature, humidity, rainfall, and atmospheric conditions.'],
             ['03','Physics','Model potential downwind smoke dispersion using a Gaussian plume approach.'],
-            ['04','Machine Learning','Forecast PM2.5 one hour ahead using a temporally locked predictive model.'],
+            ['04','Baselines','Evaluate persistence and physics baselines across 2–12h horizons before investing in neural correction.'],
             ['05','Validation','Evaluate predictions using a strict time-based holdout to prevent temporal leakage.'],
           ].map(([n,t,d]) => <article className="approach-card panel" key={n}><span className="approach-number mono">{n}</span><h3>{t}</h3><p className="dim">{d}</p><div className="card-beam" /></article>)}
         </div>
@@ -185,12 +189,24 @@ export default function Nexair() {
       </section>
 
       <section className="section result-section" id="result">
-        <div className="section-heading"><div><p className="kicker">// the_result</p><h2 className="section-title">PM2.5 Forecast — Test Set</h2></div><span className="result-chip mono">TEMPORALLY LOCKED</span></div>
+        <div className="section-heading"><div><p className="kicker">// the_result</p><h2 className="section-title">Baseline Evaluation — Test Set</h2></div><span className="result-chip mono">TEMPORALLY LOCKED · LEAKAGE-FREE</span></div>
         <div className="metrics-grid">
-          {[['0.866','µg/m³','MAE'],['1.445','µg/m³','RMSE'],['0.898','','R²']].map(([v,u,l]) => <div className="metric panel" key={l}><span className="metric-value mono">{v}</span><span className="metric-unit mono">{u}</span><span className="metric-label">{l}</span></div>)}
+          {[['2,198','events','fire clusters'],['0.039','(z-score)','E0 MAE @2h'],['0.196','(z-score)','E1 MAE @2h']].map(([v,u,l]) => <div className="metric panel" key={l}><span className="metric-value mono">{v}</span><span className="metric-unit mono">{u}</span><span className="metric-label">{l}</span></div>)}
         </div>
-        <p className="result-copy">Compared with a persistence baseline, the final HGB model improved test-set MAE by <strong>1.63%</strong>, RMSE by <strong>5.94%</strong>, and R² by <strong>1.34 percentage points</strong>.</p>
+        <p className="result-copy">On the temporally-locked 2025 test set, the <strong>E0 persistence baseline outperforms the E1 Gaussian plume baseline at every forecast horizon (2–12h)</strong> — not the outcome I expected going in, and I'm reporting it as-is rather than dressing it up. Two honest reasons: PM2.5 is naturally autocorrelated hour-to-hour, and source attribution currently finds a candidate fire source for only <strong>22%</strong> of air-quality timestamps, so E1 is effectively predicting near-zero most of the time. No neural correction model (E2/E3/PINN) has been trained yet — that step is intentionally gated until this physics baseline and attribution coverage are solid enough to be worth improving on.</p>
         <Chart />
+      </section>
+
+      <section className="section split-section">
+        <div><p className="kicker">// known_limitations</p><h2 className="section-title">What this result doesn't claim.</h2></div>
+        <div className="question-list">
+          {[
+            ['C_proxy is a proxy, not ground truth', 'z-scored PM2.5, likely reanalysis — not a direct sensor reading.'],
+            ['Attribution is spatiotemporal, not causal', 'a fire "linked" to a reading is a nearest-in-space-and-time match.'],
+            ['Weather & air quality are single-point', 'one grid cell each — not a spatial field across the study area.'],
+            ['Window is ~3.5 years, 78% from one season', '2023 El Niño dominates; 2024–2025 look meaningfully different.'],
+          ].map(([q, a]) => <div className="question" key={q}><span>{q}</span><strong className="dim">{a}</strong></div>)}
+        </div>
       </section>
 
       <section className="section built-section">
@@ -198,7 +214,7 @@ export default function Nexair() {
         <div className="build-list">
           {[
             ['01','Data Pipeline','Integrated wildfire hotspot, weather, and air-quality observations into a temporally aligned dataset.'],
-            ['02','Prediction Model','Built a HistGradientBoosting model for one-hour-ahead PM2.5 forecasting.'],
+            ['02','Baseline Models','Implemented E0 persistence and E1 physics-calibrated Gaussian plume baselines; neural correction (E2+) is intentionally gated until they hold up.'],
             ['03','Atmospheric Physics','Implemented a Gaussian plume model to estimate downwind smoke dispersion and provide a mechanistic interpretation layer.'],
             ['04','Validation System','Implemented temporal splitting, leakage audits, feature ablation, residual analysis, and physics-signal validation.'],
           ].map(([n,t,d]) => <article className="build-row" key={n}><span className="build-index mono">{n}</span><h3>{t}</h3><p className="dim">{d}</p><span className="build-arrow">↗</span></article>)}
@@ -214,7 +230,7 @@ export default function Nexair() {
 
       <section className="section nexair-close panel">
         <div><p className="kicker">// view_project</p><h2 className="section-title">From signal to decision.</h2><p className="dim">Explore the experiments, visualizations, and system logs behind NEXAIR.</p></div>
-        <div className="close-actions"><Link className="btn" to="/experiments">Explore NEXAIR →</Link><Link className="btn btn-ghost" to="/playground">Open Playground ↗</Link></div>
+        <div className="close-actions"><Link className="btn" to="/experiments">Explore NEXAIR →</Link><Link className="btn btn-ghost" to="/playground">Open Playground ↗</Link><a className="btn btn-ghost" href="https://github.com/REPLACE_WITH_NEXAIR_REPO" target="_blank" rel="noreferrer">View Repo ↗</a></div>
       </section>
     </div>
   )

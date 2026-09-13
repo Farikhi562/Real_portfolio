@@ -48,6 +48,34 @@
 .titlebar-right {
   font-size: 0.78rem;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fx-toggle {
+  font-size: 0.7rem;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-dim);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+.fx-toggle:hover {
+  border-color: var(--ember-deep);
+  color: var(--ink);
+}
+.fx-toggle[aria-pressed="true"] {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+
+/* When fx is toggled off: strip ambient/decorative motion, keep content intact */
+body.reduce-effects .ember-field,
+body.reduce-effects .node-field,
+body.reduce-effects .cursor-glow {
+  display: none !important;
 }
 .drawer-toggle {
   display: none;

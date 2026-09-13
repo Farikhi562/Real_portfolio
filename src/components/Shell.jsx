@@ -18,6 +18,9 @@ function useClock() {
 export default function Shell({ children }) {
   const location = useLocation()
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [reduceEffects, setReduceEffects] = useState(() => {
+    try { return localStorage.getItem('nexa-reduce-effects') === '1' } catch { return false }
+  })
   const time = useClock()
   const current = NAV.find((n) => n.path === location.pathname) || NAV[0]
   const rootItems = NAV.filter((n) => n.folder === 'root')
@@ -26,6 +29,11 @@ export default function Shell({ children }) {
   useEffect(() => {
     setDrawerOpen(false)
   }, [location.pathname])
+
+  useEffect(() => {
+    document.body.classList.toggle('reduce-effects', reduceEffects)
+    try { localStorage.setItem('nexa-reduce-effects', reduceEffects ? '1' : '0') } catch {}
+  }, [reduceEffects])
 
   return (
     <div className="shell">
@@ -53,6 +61,14 @@ export default function Shell({ children }) {
           </span>
         </div>
         <div className="titlebar-right mono dim">
+          <button
+            className="fx-toggle mono"
+            onClick={() => setReduceEffects((v) => !v)}
+            aria-pressed={reduceEffects}
+            title="Matikan/nyalain efek visual (particle, glow)"
+          >
+            fx: {reduceEffects ? 'off' : 'on'}
+          </button>
           {time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
         </div>
       </header>
