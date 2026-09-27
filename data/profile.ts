@@ -14,8 +14,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/fauzanalfarikhi",
 } as const;
 
-// Set to a verified local image path when a profile photo is ready.
-export const profilePhoto: string | undefined = undefined;
+export const profilePhoto = "/images/profile.jpg";
 
 export const navigation = [
   { label: "About", href: "/#about" },
