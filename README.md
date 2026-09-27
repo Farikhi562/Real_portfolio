@@ -1,73 +1,61 @@
-# NEXA Portfolio — "Model in Training"
+# Zan — Personal Portfolio
 
-Website portofolio React multi-page dengan tema "Model in Training": tampilan
-mirip IDE/terminal (title bar, file explorer, tab bar, status bar), dengan
-8 halaman yang masing-masing punya route sendiri.
+Portfolio pribadi **Muhamad Fauzan Al Farikhi (Zan)**, mahasiswa S1 Informatika di Universitas Gunadarma yang sedang membangun jalur menuju AI Engineering.
 
-## Menjalankan di lokal
+Situs ini menampilkan proyek, inisiatif teknologi, pengalaman program dan kompetisi, fokus belajar, serta kontak profesional. Status proyek dibedakan dengan jelas antara *building*, *ongoing*, *in development*, dan *concept*. Tautan demo, repositori, foto, dan dokumen hanya ditampilkan setelah tersedia.
 
-Butuh Node.js 18+ terpasang di komputer kamu (project ini dibuat tanpa akses
-internet di sandbox, jadi dependency belum ter-install — jalankan langkah di
-bawah di komputer kamu sendiri).
+## Teknologi
+
+- Next.js App Router
+- TypeScript
+- Tailwind CSS 4 dan CSS responsif
+- Git dan GitHub
+- Siap dideploy ke Vercel
+
+## Menjalankan secara lokal
+
+Gunakan Node.js 20.9 atau lebih baru.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Buka `http://localhost:5173`.
+Buka <http://localhost:3000>.
 
-Untuk build produksi (misalnya buat di-deploy ke Vercel/Netlify):
+Perintah lain:
 
 ```bash
 npm run build
-npm run preview   # opsional, buat cek hasil build
+npm run start
+npm run lint
 ```
 
-Hasil build ada di folder `dist/` — itu yang di-upload ke hosting.
+## URL produksi
 
-## Struktur halaman
+Domain produksi portfolio: <https://frikhii.my.id>. Domain ini dipakai sebagai canonical URL dan metadata berbasis URL absolut. Nilai dapat diubah lewat `NEXT_PUBLIC_SITE_URL` jika domain produksi berganti.
 
-| Route | File | Isi |
-|---|---|---|
-| `/` | `src/pages/Home.jsx` | Boot sequence + ringkasan modul |
-| `/about` | `src/pages/About.jsx` | "The Model" — timeline training progress |
-| `/architecture` | `src/pages/Architecture.jsx` | Diagram skill sebagai neural network |
-| `/nexa` | `src/pages/Company.jsx` | Profil NEXA Tech Labs, klien, produk |
-| `/experiments` | `src/pages/Experiments.jsx` | Deep dive NEXAIR (flagship) |
-| `/playground` | `src/pages/Playground.jsx` | Simulasi interaktif estimasi PM2.5 |
-| `/logs` | `src/pages/SystemLogs.jsx` | Changelog achievement |
-| `/contact` | `src/pages/Contact.jsx` | Form kontak (dikirim lewat mailto) |
+```text
+NEXT_PUBLIC_SITE_URL=https://frikhii.my.id
+```
 
-## Yang perlu kamu edit sebelum publish
+Umur dihitung saat build dari `PROFILE_BIRTH_DATE` dalam format `YYYY-MM-DD`. Simpan nilai ini hanya sebagai server environment variable lokal/deployment; jangan gunakan awalan `NEXT_PUBLIC_` dan jangan commit tanggal lahir ke repository. Tanpa nilai tersebut, situs menampilkan `TBD`.
 
-1. **`src/pages/Contact.jsx`** — ganti `CONTACT_EMAIL` dengan email asli kamu,
-   dan isi link `SOCIALS` (LinkedIn, GitHub, Instagram, dll — sekarang masih `#`).
-2. **`public/assets/`** — semua logo NEXA & foto profil kamu sudah dimasukkan
-   di sini (`logo-nexair.jpg`, `logo-nexa-tech-labs.png`, `logo-nexa-campus.jpg`,
-   `logo-nexa-sphere.png`, `profile.jpg`). Ganti kalau ada versi baru.
-3. **Playground** (`src/pages/Playground.jsx`) — pakai rumus estimasi
-   Gaussian plume yang disederhanakan buat demo, bukan model ML NEXAIR asli
-   (sudah ada disclaimer di halaman). Aman buat ditampilkan ke publik karena
-   tidak membocorkan logika model asli.
-4. Warna & font ada di `src/styles/tokens.css` kalau mau disesuaikan lagi.
+## Struktur proyek
 
-## Deploy
+```text
+app/                 Halaman, layout, metadata, favicon, Open Graph, dan CSS
+components/          Navigasi dan komponen antarmuka yang dapat digunakan ulang
+data/                Konten profil, proyek, pengalaman, serta skills
+public/              Aset publik (foto dan dokumen dapat ditambahkan kemudian)
+```
 
-Paling gampang pakai Vercel atau Netlify — drag-drop folder ini (setelah
-`npm install`) atau connect ke repo GitHub, framework preset "Vite".
+Konten dipisahkan dari UI di folder `data/` agar proyek baru dapat ditambahkan tanpa menulis ulang layout. Detail implementasi RAG yang belum ditentukan, foto profil, dokumen, repositori proyek, dan demo tetap ditandai belum tersedia.
 
-## Added in this update
-- NEXA Sphere case study at `/nexa-sphere`
-- Interactive business-intelligence dashboard visual
-- Demand forecast sparkline, inventory risk ring, AI recommendation strip
-- Business Data → External Intelligence → AI Analysis → Action narrative
-- NEXA Sphere added to navigation and Experiments case-study CTA
+## Kontak
 
-## Update besar-besaran (sesi ini)
-- Tema warna diganti total dari teal → merah/ember (tokens.css + seluruh halaman), termasuk background yang dihangatkan dari biru-gelap ke hitam kemerahan.
-- Komponen baru `EmberField` — partikel bara/api 2D melayang — dipasang ambient di seluruh halaman (lewat Shell) dan versi lebih rapat di News, Playground, Nexair, Experiments.
-- News: filter kategori interaktif (Semua/NEXAIR/Kompetisi/Pameran) + strip statistik live.
-- Playground: preset skenario kebakaran (kecil/sedang/besar/angin kencang) + log riwayat run_model + kategori "Tidak Sehat" kini pakai warna danger yang beda dari "Tidak Sehat (Sensitif)".
-- Home: strip quick-facts di hero. About: progress bar training animasi. Architecture: sinyal berjalan antar layer. Company: strip statistik. SystemLogs: baris live-tail terminal. Contact: badge ketersediaan.
-- Semua build diverifikasi lewat `npm run build` di setiap tahap — tidak ada error.
+- Email: [fauzanalfa36@gmail.com](mailto:fauzanalfa36@gmail.com)
+- LinkedIn: [fauzanalfarikhi](https://www.linkedin.com/in/fauzanalfarikhi)
+- GitHub: [Farikhi562](https://github.com/Farikhi562)
+
+Konten dan status proyek mengikuti prinsip: jangan mengklaim hal yang belum dibangun atau diverifikasi.

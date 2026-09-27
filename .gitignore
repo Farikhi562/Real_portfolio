@@ -1,4 +1,12 @@
-node_modules
-dist
+node_modules/
+dist/
+.next/
+out/
+build/
+coverage/
+.vercel/
+*.tsbuildinfo
 .DS_Store
 *.local
+.env*
+!.env.example
