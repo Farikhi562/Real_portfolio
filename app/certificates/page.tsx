@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CertificateCard } from "@/components/certificate-card";
 import { SiteHeader } from "@/components/site-header";
 import { certificateCategories, certificates } from "@/data/certificates";
@@ -16,9 +17,9 @@ export default function CertificatesPage() {
         <div className="certificates-grid archive-certificates-grid">
           {certificates.map((certificate, index) => <CertificateCard key={certificate.id} certificate={certificate} index={index} />)}
         </div>
-        <a className="text-link archive-back-link" href="/#certificates">← Back to featured certificates</a>
+        <Link className="text-link archive-back-link" href="/#certificates">← Back to featured certificates</Link>
       </main>
-      <footer className="site-footer page-shell"><a className="footer-brand" href="/#top">Z<span>.</span></a><p>AI Engineer in the Making.</p><a className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></a></footer>
+      <footer className="site-footer page-shell"><Link className="footer-brand" href="/#top">Z<span>.</span></Link><p>AI Engineer in the Making.</p><Link className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></Link></footer>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ProjectCard } from "@/components/project-card";
 import { SiteHeader } from "@/components/site-header";
 import { projects } from "@/data/projects";
@@ -13,9 +14,9 @@ export default function ProjectsPage() {
         <div className="project-grid archive-project-grid">
           {projects.map((project, index) => <ProjectCard key={project.title} project={project} featured={index === 0} />)}
         </div>
-        <a className="text-link archive-back-link" href="/#projects">← Back to selected work</a>
+        <Link className="text-link archive-back-link" href="/#projects">← Back to selected work</Link>
       </main>
-      <footer className="site-footer page-shell"><a className="footer-brand" href="/#top">Z<span>.</span></a><p>AI Engineer in the Making.</p><a className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></a></footer>
+      <footer className="site-footer page-shell"><Link className="footer-brand" href="/#top">Z<span>.</span></Link><p>AI Engineer in the Making.</p><Link className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></Link></footer>
     </>
   );
 }

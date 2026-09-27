@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { experiences } from "@/data/experience";
 import { calculateAge } from "@/data/age";
 import { learningPriorities, skillGroups } from "@/data/skills";
@@ -117,7 +118,7 @@ export default function Home() {
           <div className="project-grid project-grid-home">
             {featuredProjects.map((project, index) => <ProjectCard key={project.title} project={project} featured={index === 0} />)}
           </div>
-          <a className="button button-secondary section-action" href="/projects">View more projects <span aria-hidden="true">↗</span></a>
+          <Link className="button button-secondary section-action" href="/projects">View more projects <span aria-hidden="true">↗</span></Link>
           <p className="section-footnote"><span className="signal-dot" /> Project statuses describe the current state; concepts are not presented as deployed products.</p>
         </section>
 
@@ -255,7 +256,7 @@ export default function Home() {
                 <CertificateCard key={certificate.id} certificate={certificate} index={index} />
               ))}
             </div>
-            <a className="button button-secondary section-action" href="/certificates">View more certificates <span aria-hidden="true">↗</span></a>
+            <Link className="button button-secondary section-action" href="/certificates">View more certificates <span aria-hidden="true">↗</span></Link>
           </div>
         </section>
 
@@ -271,7 +272,7 @@ export default function Home() {
             <div className="activities-grid">
               {activities.map((activity, index) => <ActivityCard key={activity.id} activity={activity} index={index} />)}
             </div>
-            <a className="button button-secondary section-action" href="/activities">View more activities <span aria-hidden="true">↗</span></a>
+            <Link className="button button-secondary section-action" href="/activities">View more activities <span aria-hidden="true">↗</span></Link>
           </div>
         </section>
 
@@ -291,7 +292,11 @@ export default function Home() {
                     <span className="document-type">{post.category} · {post.date}</span>
                     <h3>{post.title}</h3>
                     <p>{post.excerpt}</p>
-                    <a className="text-link" href={post.url ?? `/blog/${post.slug}`}>Read note <span aria-hidden="true">↗</span></a>
+                    {post.url ? (
+                      <a className="text-link" href={post.url} target="_blank" rel="noreferrer">Read note <span aria-hidden="true">↗</span></a>
+                    ) : (
+                      <Link className="text-link" href={`/blog/${post.slug}`}>Read note <span aria-hidden="true">↗</span></Link>
+                    )}
                   </article>
                 ))}
               </div>
@@ -302,7 +307,7 @@ export default function Home() {
                 <span className="status-pill status-concept"><span className="status-dot" /> Drafting</span>
               </div>
             )}
-            <a className="button button-secondary section-action" href="/blog">View blog <span aria-hidden="true">↗</span></a>
+            <Link className="button button-secondary section-action" href="/blog">View blog <span aria-hidden="true">↗</span></Link>
           </div>
         </section>
 
@@ -322,7 +327,7 @@ export default function Home() {
                   <span className="document-type">{document.type}</span>
                   <h3>{document.title}</h3>
                   {"href" in document ? (
-                    <a className="document-unavailable document-action" href={document.href}>{document.action} <span aria-hidden="true">↗</span></a>
+                    <Link className="document-unavailable document-action" href={document.href}>{document.action} <span aria-hidden="true">↗</span></Link>
                   ) : <span className="document-unavailable">{document.action}</span>}
                 </article>
               ))}
@@ -351,7 +356,7 @@ export default function Home() {
         <a className="footer-brand" href="#top" aria-label="Back to top">Z<span>.</span></a>
         <p>AI Engineer in the Making.</p>
         <div className="footer-links">
-          {navigation.slice(1).map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
+          {navigation.slice(1).map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
         </div>
         <span className="copyright">© 2026 {profile.name}</span>
         <a className="back-top" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { navigation, profile } from "@/data/profile";
 
@@ -9,10 +10,10 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner page-shell">
-        <a className="brand" href="/#top" aria-label={`${profile.preferredName}, back to top`} onClick={() => setMenuOpen(false)}>
+        <Link className="brand" href="/#top" aria-label={`${profile.preferredName}, back to top`} onClick={() => setMenuOpen(false)}>
           <span className="brand-mark" aria-hidden="true">Z</span>
           <span className="brand-name">ZAN<span className="brand-period">.</span></span>
-        </a>
+        </Link>
 
         <button
           className="menu-toggle"
@@ -32,7 +33,7 @@ export function SiteHeader() {
           aria-label="Main navigation"
         >
           {navigation.map((item, index) => (
-            <a
+            <Link
               className={index === navigation.length - 1 ? "nav-contact" : undefined}
               href={item.href}
               key={item.href}
@@ -40,7 +41,7 @@ export function SiteHeader() {
             >
               {item.label}
               {index === navigation.length - 1 ? <span aria-hidden="true"> ↗</span> : null}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

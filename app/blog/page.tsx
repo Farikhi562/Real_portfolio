@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { blogPosts } from "@/data/blog";
 
@@ -18,7 +19,11 @@ export default function BlogPage() {
                 <span className="document-type">{post.category} · {post.date}</span>
                 <h2>{post.title}</h2>
                 <p>{post.excerpt}</p>
-                <a className="text-link" href={post.url ?? `/blog/${post.slug}`}>Read note <span aria-hidden="true">↗</span></a>
+                {post.url ? (
+                  <a className="text-link" href={post.url} target="_blank" rel="noreferrer">Read note <span aria-hidden="true">↗</span></a>
+                ) : (
+                  <Link className="text-link" href={`/blog/${post.slug}`}>Read note <span aria-hidden="true">↗</span></Link>
+                )}
               </article>
             ))}
           </div>
@@ -29,9 +34,9 @@ export default function BlogPage() {
             <span className="status-pill status-concept"><span className="status-dot" /> No published posts</span>
           </div>
         )}
-        <a className="text-link archive-back-link" href="/#blog">← Back to home</a>
+        <Link className="text-link archive-back-link" href="/#blog">← Back to home</Link>
       </main>
-      <footer className="site-footer page-shell"><a className="footer-brand" href="/#top">Z<span>.</span></a><p>AI Engineer in the Making.</p><a className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></a></footer>
+      <footer className="site-footer page-shell"><Link className="footer-brand" href="/#top">Z<span>.</span></Link><p>AI Engineer in the Making.</p><Link className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></Link></footer>
     </>
   );
 }

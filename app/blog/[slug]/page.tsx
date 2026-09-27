@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { blogPosts } from "@/data/blog";
@@ -27,7 +28,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <>
       <SiteHeader />
       <main className="page-shell article-page">
-        <a className="text-link" href="/blog">← All notes</a>
+        <Link className="text-link" href="/blog">← All notes</Link>
         <article>
           <p className="eyebrow article-meta">{post.category} · {post.date}</p>
           <h1>{post.title}</h1>
@@ -38,7 +39,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         </article>
       </main>
-      <footer className="site-footer page-shell"><a className="footer-brand" href="/#top">Z<span>.</span></a><p>AI Engineer in the Making.</p><a className="back-top" href="/blog">ALL NOTES <span aria-hidden="true">↗</span></a></footer>
+      <footer className="site-footer page-shell"><Link className="footer-brand" href="/#top">Z<span>.</span></Link><p>AI Engineer in the Making.</p><Link className="back-top" href="/blog">ALL NOTES <span aria-hidden="true">↗</span></Link></footer>
     </>
   );
 }

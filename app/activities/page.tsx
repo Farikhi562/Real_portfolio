@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ActivityCard } from "@/components/activity-card";
 import { SiteHeader } from "@/components/site-header";
 import { activities } from "@/data/activities";
@@ -13,9 +14,9 @@ export default function ActivitiesPage() {
         <div className="activities-grid archive-activities-grid">
           {activities.map((activity, index) => <ActivityCard key={activity.id} activity={activity} index={index} />)}
         </div>
-        <a className="text-link archive-back-link" href="/#activities">← Back to selected moments</a>
+        <Link className="text-link archive-back-link" href="/#activities">← Back to selected moments</Link>
       </main>
-      <footer className="site-footer page-shell"><a className="footer-brand" href="/#top">Z<span>.</span></a><p>AI Engineer in the Making.</p><a className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></a></footer>
+      <footer className="site-footer page-shell"><Link className="footer-brand" href="/#top">Z<span>.</span></Link><p>AI Engineer in the Making.</p><Link className="back-top" href="/#top">HOME <span aria-hidden="true">↗</span></Link></footer>
     </>
   );
 }
