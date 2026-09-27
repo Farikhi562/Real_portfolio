@@ -1,17 +1,20 @@
+import Image from "next/image";
 import type { Project } from "@/data/projects";
 
 const statusClass: Record<Project["status"], string> = {
   Building: "status-building",
   Ongoing: "status-ongoing",
+  Completed: "status-completed",
   Concept: "status-concept",
-  "In development": "status-development",
+  Exploring: "status-exploring",
+  Draft: "status-draft",
 };
 
 export function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
   return (
     <article className={`project-card${featured ? " project-card-featured" : ""}`}>
       <div className="project-card-topline">
-        <span className="project-number">{project.number} / 06</span>
+        <span className="project-number">{project.number} / 05</span>
         <span className={`status-pill ${statusClass[project.status]}`}>
           <span aria-hidden="true" className="status-dot" />
           {project.status}
@@ -22,6 +25,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
         <h3>{project.title}</h3>
         <p className="project-description">{project.description}</p>
       </div>
+      {project.image ? <Image className="project-image" src={project.image} alt={`${project.title} project`} width={1200} height={720} sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 560px" /> : null}
       {featured ? (
         <div className="pipeline" aria-label="Simplified RAG question-answering flow">
           <div className="pipeline-label"><span className="signal-dot" /> SYSTEM FLOW</div>
@@ -41,12 +45,15 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
           <span className="project-detail">{project.detail}</span>
         </div>
         <div className="project-links">
+          {project.externalUrl ? (
+            <a href={project.externalUrl} target="_blank" rel="noreferrer">Project site <span aria-hidden="true">↗</span></a>
+          ) : null}
           {project.github ? (
             <a href={project.github} target="_blank" rel="noreferrer">Repository <span aria-hidden="true">↗</span></a>
-          ) : <span className="link-pending">Repository details pending</span>}
+          ) : <span className="link-pending">GitHub: TBD</span>}
           {project.demo ? (
             <a href={project.demo} target="_blank" rel="noreferrer">Live demo <span aria-hidden="true">↗</span></a>
-          ) : <span className="link-pending">No public demo yet</span>}
+          ) : <span className="link-pending">Live demo: TBD</span>}
         </div>
       </div>
     </article>

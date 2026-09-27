@@ -1,13 +1,13 @@
 export type SkillGroup = {
   title: string;
-  state: "Foundation" | "Building" | "Learning" | "Exploring";
+  state: "Building" | "Learning" | "Exploring" | "Applied";
   skills: string[];
 };
 
 export const skillGroups: SkillGroup[] = [
   {
     title: "Programming foundations",
-    state: "Foundation",
+    state: "Learning",
     skills: ["Python", "Programming concepts", "Object-oriented programming", "Data structures", "Algorithms"],
   },
   {

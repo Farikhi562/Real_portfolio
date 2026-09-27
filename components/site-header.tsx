@@ -9,7 +9,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner page-shell">
-        <a className="brand" href="#top" aria-label={`${profile.preferredName}, back to top`} onClick={() => setMenuOpen(false)}>
+        <a className="brand" href="/#top" aria-label={`${profile.preferredName}, back to top`} onClick={() => setMenuOpen(false)}>
           <span className="brand-mark" aria-hidden="true">Z</span>
           <span className="brand-name">ZAN<span className="brand-period">.</span></span>
         </a>

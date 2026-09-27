@@ -18,31 +18,39 @@ export const experiences: ExperienceItem[] = [
     contribution: "Technology · Business development · Product thinking",
   },
   {
-    title: "GEMASTIK XIX 2026",
-    organization: "Pengembangan Bisnis TIK",
-    category: "Competition",
-    status: "Competition experience",
-    description:
-      "Developing a technology-business proposal with a small team for the ICT Business Development category. Team: Rangga Dwi Prasetyo (Finance) and Mirza Danisywar Noor Wahyu (Marketing / Sales).",
-    contribution:
-      "Team Lead · Business validation · Market research · Product positioning",
-  },
-  {
-    title: "UI/UX Design Competition — Nuget Rebus",
-    organization: "Competition project",
-    category: "Design · Product",
-    status: "Experience",
-    description:
-      "Contributed to the product experience from problem research through a prototype direction.",
-    contribution: "Problem research · AI feature exploration · User flow · Wireframe · Prototype",
-  },
-  {
     title: "NEXA Tech Labs",
     organization: "NEXA ecosystem",
     category: "Technology · Entrepreneurship",
     status: "Ongoing",
     description:
-      "Building technology initiatives with a team, connecting engineering practice with product and business thinking.",
+      "A team-built initiative for product development, technology experimentation, engineering, and entrepreneurship. Related initiatives include NEXA Campus, NEXA Sphere, and NEXCAMP.",
     contribution: "Builder · Project lead",
+  },
+  {
+    title: "NEXCAMP",
+    organization: "NEXA ecosystem",
+    category: "Product · Technology · Entrepreneurship",
+    status: "Ongoing",
+    description:
+      "Building practical digital products while combining software, AI, and entrepreneurial thinking.",
+    contribution: "Product development · Teamwork · Experimentation",
+  },
+  {
+    title: "UI/UX Design Competition — Nuget Rebus",
+    organization: "Competition project",
+    category: "Competition · UI/UX",
+    status: "Experience",
+    description:
+      "Contributed to the product experience from problem research through a prototype direction.",
+    contribution: "Problem research · AI features · User flow · Wireframe · Prototype",
+  },
+  {
+    title: "Technology Product Exhibition — FTI",
+    organization: "Fakultas Teknologi Industri",
+    category: "Exhibition · Technology",
+    status: "Completed",
+    description:
+      "Participated in a technology product showcase. Product name, event date, and individual role are not yet documented.",
+    contribution: "Product showcase · Product, date, and role: TBD",
   },
 ];

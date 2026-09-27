@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
               height: 52,
               alignItems: "center",
               justifyContent: "center",
-              border: "1px solid #83a7ff",
+              border: "1px solid #b69aff",
               borderRadius: 12,
               fontSize: 25,
               fontWeight: 700,
@@ -39,7 +39,7 @@ export default function OpenGraphImage() {
           <span style={{ color: "#a7b0bd", fontSize: 19, letterSpacing: 5 }}>PERSONAL PORTFOLIO</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-          <span style={{ color: "#83a7ff", fontSize: 21, letterSpacing: 4 }}>MUHAMAD FAUZAN AL FARIKHI</span>
+          <span style={{ color: "#b69aff", fontSize: 21, letterSpacing: 4 }}>MUHAMAD FAUZAN AL FARIKHI</span>
           <span style={{ fontSize: 69, fontWeight: 700, letterSpacing: -3 }}>Building toward</span>
           <span style={{ fontSize: 69, fontWeight: 700, letterSpacing: -3 }}>AI Engineering.</span>
         </div>

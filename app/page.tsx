@@ -1,8 +1,16 @@
+import Image from "next/image";
 import { experiences } from "@/data/experience";
 import { calculateAge } from "@/data/age";
 import { learningPriorities, skillGroups } from "@/data/skills";
-import { navigation, profile } from "@/data/profile";
+import { navigation, profile, profilePhoto } from "@/data/profile";
 import { projects } from "@/data/projects";
+import { achievements } from "@/data/achievements";
+import { certificates } from "@/data/certificates";
+import { activities } from "@/data/activities";
+import { blogPosts } from "@/data/blog";
+import { AchievementCard } from "@/components/achievement-card";
+import { ActivityCard } from "@/components/activity-card";
+import { CertificateCard } from "@/components/certificate-card";
 import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
@@ -35,14 +43,13 @@ const focusAreas = [
 ];
 
 const documents = [
-  { title: "Curriculum Vitae", type: "PDF · Resume", action: "Not available yet" },
-  { title: "Portfolio PDF", type: "PDF · Selected work", action: "Not available yet" },
-  { title: "Certificates", type: "Learning · Programs", action: "No documents added yet" },
+  { title: "Curriculum Vitae", type: "PDF · Resume", action: "Status: TBD" },
+  { title: "Portfolio PDF", type: "PDF · Selected work", action: "Status: TBD" },
+  { title: "Certificates", type: "Archive · Credentials", action: "Browse certificate archive", href: "/certificates" },
 ];
 
 export default function Home() {
-  const ragProject = projects[0];
-  const otherProjects = projects.slice(1);
+  const featuredProjects = projects.slice(0, 4);
   const currentAge = process.env.PROFILE_BIRTH_DATE
     ? calculateAge(process.env.PROFILE_BIRTH_DATE)
     : "TBD";
@@ -66,14 +73,20 @@ export default function Home() {
             <div className="hero-facts" aria-label="Education summary">
               <div><span className="fact-label">STUDYING</span><span>{profile.program}</span></div>
               <div><span className="fact-label">UNIVERSITY</span><span>{profile.university}</span></div>
-              <div><span className="fact-label">COHORT</span><span>{profile.cohort} <span className="fact-separator">·</span> Semester {profile.semester}</span></div>
+              <div><span className="fact-label">ACADEMIC RECORD</span><span>IPK {profile.gpa} <span className="fact-separator">·</span> Semester {profile.semester}</span></div>
             </div>
           </div>
           <div className="portrait-wrap">
-            <div className="portrait-card" role="img" aria-label="Profile photo placeholder, ready for Zan's portrait">
+            <div className="portrait-card" role={profilePhoto ? undefined : "img"} aria-label={profilePhoto ? undefined : "Profile photo placeholder, ready for Zan's portrait"}>
               <span className="portrait-index">PROFILE / 001</span>
-              <span className="portrait-monogram" aria-hidden="true">Z<span>.</span></span>
-              <span className="portrait-placeholder">Portrait placeholder</span>
+              {profilePhoto ? (
+                <Image className="portrait-image" src={profilePhoto} alt="Portrait of Zan" fill priority sizes="(max-width: 700px) 84vw, 38vw" />
+              ) : (
+                <>
+                  <span className="portrait-monogram" aria-hidden="true">Z<span>.</span></span>
+                  <span className="portrait-placeholder">Portrait placeholder</span>
+                </>
+              )}
               <span className="portrait-corner portrait-corner-tl" aria-hidden="true" />
               <span className="portrait-corner portrait-corner-tr" aria-hidden="true" />
               <span className="portrait-corner portrait-corner-bl" aria-hidden="true" />
@@ -88,7 +101,7 @@ export default function Home() {
         <section className="intro-strip" aria-label="Personal positioning">
           <div className="page-shell intro-strip-inner">
             <span className="intro-mark">Z<span>.</span></span>
-            <p>Curious by nature. <strong>Building with intent.</strong> Learning by shipping.</p>
+            <p>Curious by nature. <strong>Building with intent.</strong> Learning through projects, competitions, and exhibitions.</p>
             <span className="intro-side-note">A WORK IN PROGRESS, BY DESIGN</span>
           </div>
         </section>
@@ -101,11 +114,11 @@ export default function Home() {
             title="Ideas in motion."
             description="A mix of projects in development, ongoing initiatives, and concepts. Each status reflects where the work actually is today."
           />
-          <div className="project-grid">
-            <ProjectCard project={ragProject} featured />
-            {otherProjects.map((project) => <ProjectCard key={project.title} project={project} />)}
+          <div className="project-grid project-grid-home">
+            {featuredProjects.map((project, index) => <ProjectCard key={project.title} project={project} featured={index === 0} />)}
           </div>
-          <p className="section-footnote"><span className="signal-dot" /> Project links and implementation details will appear here when they are ready to share.</p>
+          <a className="button button-secondary section-action" href="/projects">View more projects <span aria-hidden="true">↗</span></a>
+          <p className="section-footnote"><span className="signal-dot" /> Project statuses describe the current state; concepts are not presented as deployed products.</p>
         </section>
 
         <section className="focus-section" aria-labelledby="focus-title">
@@ -138,6 +151,10 @@ export default function Home() {
             title="Learning beyond the classroom."
             description="Programs, competitions, and team initiatives that shape how I think about technology and building products."
           />
+          <div className="achievement-grid">
+            {achievements.map((achievement, index) => <AchievementCard key={achievement.title} achievement={achievement} index={index} />)}
+          </div>
+          <h3 className="experience-subheading">Programs, products & contributions</h3>
           <div className="experience-list">
             {experiences.map((item, index) => (
               <article className="experience-row" key={item.title}>
@@ -201,7 +218,7 @@ export default function Home() {
             <div className="about-copy">
               <p className="about-lead">I&apos;m Zan, an Informatics student at Universitas Gunadarma building my path toward AI Engineering.</p>
               <p>With an MIPA background and an interest in mathematics, logic, and technology, I moved deeper into programming, data, and artificial intelligence. Today, I&apos;m focused on turning what I learn into practical projects, from RAG applications and data-driven systems to technology products and entrepreneurship initiatives.</p>
-              <p>I&apos;m also exploring IoT as another area I want to understand more deeply. I don&apos;t consider myself an expert yet. I&apos;m building, learning, and improving through every project.</p>
+              <p>I&apos;ve also taken part in technology and business competitions and product exhibitions, using each experience to learn, test ideas, and improve. I&apos;m still exploring IoT and building my engineering foundations through every project.</p>
               <a className="text-link" href="#contact">More about my work <span aria-hidden="true">↗</span></a>
             </div>
             <dl className="profile-card">
@@ -213,6 +230,7 @@ export default function Home() {
                 <span><dt>COHORT</dt><dd>{profile.cohort}</dd></span>
                 <span><dt>SEMESTER</dt><dd>{profile.semester}</dd></span>
               </div>
+              <div><dt>IPK</dt><dd>{profile.gpa}</dd></div>
               <div className="profile-pair">
                 <span><dt>AGE</dt><dd>{currentAge}</dd></span>
                 <span><dt>LOCATION</dt><dd>{profile.location}</dd></span>
@@ -223,14 +241,79 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="certificates-section" id="certificates" aria-labelledby="certificates-title">
+          <div className="page-shell section">
+            <SectionHeading
+              id="certificates-title"
+              index="06"
+              eyebrow="CERTIFICATES"
+              title="Selected credentials."
+              description="Five featured certificate slots are ready. Titles, issuers, dates, and image files will appear when confirmed."
+            />
+            <div className="certificates-grid">
+              {certificates.filter((certificate) => certificate.featured).slice(0, 5).map((certificate, index) => (
+                <CertificateCard key={certificate.id} certificate={certificate} index={index} />
+              ))}
+            </div>
+            <a className="button button-secondary section-action" href="/certificates">View more certificates <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+        <section className="activities-section" id="activities" aria-labelledby="activities-title">
+          <div className="page-shell section">
+            <SectionHeading
+              id="activities-title"
+              index="07"
+              eyebrow="ACTIVITIES & MOMENTS"
+              title="Work, people, and process."
+              description="A visual archive for competitions, technology exhibitions, campus events, and team projects. Photos will be added when available."
+            />
+            <div className="activities-grid">
+              {activities.map((activity, index) => <ActivityCard key={activity.id} activity={activity} index={index} />)}
+            </div>
+            <a className="button button-secondary section-action" href="/activities">View more activities <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+        <section className="blog-section" id="blog" aria-labelledby="blog-title">
+          <div className="page-shell section">
+            <SectionHeading
+              id="blog-title"
+              index="08"
+              eyebrow="BLOG / NOTES"
+              title="Learning in public."
+              description="Notes on AI engineering, RAG experiments, Python, data, projects, and lessons from competitions."
+            />
+            {blogPosts.filter((post) => post.status === "Published").length ? (
+              <div className="blog-preview-grid">
+                {blogPosts.filter((post) => post.status === "Published").slice(0, 3).map((post) => (
+                  <article className="blog-preview-card" key={post.slug}>
+                    <span className="document-type">{post.category} · {post.date}</span>
+                    <h3>{post.title}</h3>
+                    <p>{post.excerpt}</p>
+                    <a className="text-link" href={post.url ?? `/blog/${post.slug}`}>Read note <span aria-hidden="true">↗</span></a>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="blog-coming-soon">
+                <span className="blog-status-mark" aria-hidden="true">01</span>
+                <div><p className="eyebrow">COMING SOON</p><h3>Notes are being documented.</h3><p>No posts are published yet. I&apos;ll share real experiments and project write-ups here when they&apos;re ready.</p></div>
+                <span className="status-pill status-concept"><span className="status-dot" /> Drafting</span>
+              </div>
+            )}
+            <a className="button button-secondary section-action" href="/blog">View blog <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
         <section className="documents-section" aria-labelledby="documents-title">
           <div className="page-shell section">
             <SectionHeading
               id="documents-title"
-              index="06"
+              index="09"
               eyebrow="DOCUMENTS"
               title="More context, when it's ready."
-              description="I&apos;ll add verified documents here as they become available."
+              description="Verified documents will be added here when the files are available."
             />
             <div className="documents-grid">
               {documents.map((document, index) => (
@@ -238,7 +321,9 @@ export default function Home() {
                   <span className="document-icon" aria-hidden="true">{index === 2 ? "＋" : "↗"}</span>
                   <span className="document-type">{document.type}</span>
                   <h3>{document.title}</h3>
-                  <span className="document-unavailable">{document.action}</span>
+                  {"href" in document ? (
+                    <a className="document-unavailable document-action" href={document.href}>{document.action} <span aria-hidden="true">↗</span></a>
+                  ) : <span className="document-unavailable">{document.action}</span>}
                 </article>
               ))}
             </div>

@@ -6,9 +6,9 @@ Situs ini menampilkan proyek, inisiatif teknologi, pengalaman program dan kompet
 
 ## Teknologi
 
-- Next.js App Router
+- Next.js 15 App Router
 - TypeScript
-- Tailwind CSS 4 dan CSS responsif
+- Tailwind CSS 4, Geist Sans/Mono, dan CSS responsif
 - Git dan GitHub
 - Siap dideploy ke Vercel
 
@@ -41,16 +41,23 @@ NEXT_PUBLIC_SITE_URL=https://frikhii.my.id
 
 Umur dihitung saat build dari `PROFILE_BIRTH_DATE` dalam format `YYYY-MM-DD`. Simpan nilai ini hanya sebagai server environment variable lokal/deployment; jangan gunakan awalan `NEXT_PUBLIC_` dan jangan commit tanggal lahir ke repository. Tanpa nilai tersebut, situs menampilkan `TBD`.
 
-## Struktur proyek
+## Routes dan struktur proyek
+
+- `/` — portfolio utama, achievements, pengalaman, skills, sertifikat pilihan, aktivitas, dan blog teaser
+- `/projects` — daftar project
+- `/certificates` — arsip sertifikat
+- `/activities` — arsip foto aktivitas
+- `/blog` — catatan terbit; menampilkan Coming Soon selama belum ada post terbit
+- `/blog/[slug]` — halaman artikel untuk post berstatus Published
 
 ```text
-app/                 Halaman, layout, metadata, favicon, Open Graph, dan CSS
-components/          Navigasi dan komponen antarmuka yang dapat digunakan ulang
-data/                Konten profil, proyek, pengalaman, serta skills
-public/              Aset publik (foto dan dokumen dapat ditambahkan kemudian)
+app/                 Routes, layout, metadata, sitemap, robots, favicon, Open Graph, CSS
+components/          Navigasi, project, achievement, certificate, activity cards
+data/                Profil, proyek, achievements, pengalaman, sertifikat, aktivitas, blog, skills
+public/              Foto dan dokumen terverifikasi (dapat ditambahkan kemudian)
 ```
 
-Konten dipisahkan dari UI di folder `data/` agar proyek baru dapat ditambahkan tanpa menulis ulang layout. Detail implementasi RAG yang belum ditentukan, foto profil, dokumen, repositori proyek, dan demo tetap ditandai belum tersedia.
+Konten dipisahkan dari UI di folder `data/` agar item baru dapat ditambahkan tanpa menulis ulang layout. Detail implementasi RAG yang belum ditentukan, data sertifikat, foto, dokumen, dan URL repository/demo yang belum diverifikasi tetap ditandai TBD atau placeholder.
 
 ## Kontak
 
