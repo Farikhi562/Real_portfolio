@@ -326,7 +326,7 @@ export default function Home() {
                   <span className="document-icon" aria-hidden="true">{index === 2 ? "＋" : "↗"}</span>
                   <span className="document-type">{document.type}</span>
                   <h3>{document.title}</h3>
-                  {"href" in document ? (
+                  {"href" in document && document.href ? (
                     <Link className="document-unavailable document-action" href={document.href}>{document.action} <span aria-hidden="true">↗</span></Link>
                   ) : <span className="document-unavailable">{document.action}</span>}
                 </article>
