@@ -10,7 +10,7 @@ export default function ActivitiesPage() {
       <main className="page-shell archive-page">
         <p className="eyebrow">PORTFOLIO / ACTIVITY ARCHIVE</p>
         <h1>Activities & moments.</h1>
-        <p className="archive-intro">Photo slots are ready for verified moments from competitions, technology exhibitions, campus activities, and projects.</p>
+        <p className="archive-intro">Moments from the Optura project, Nexa Competition Division, Gunadarma Industrial Engineering Fair, and a Data Science / LSP course.</p>
         <div className="activities-grid archive-activities-grid">
           {activities.map((activity, index) => <ActivityCard key={activity.id} activity={activity} index={index} />)}
         </div>

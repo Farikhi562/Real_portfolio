@@ -4,7 +4,11 @@ import type { Achievement } from "@/data/achievements";
 export function AchievementCard({ achievement, index }: { achievement: Achievement; index: number }) {
   return (
     <article className="achievement-card">
-      {achievement.image ? <Image className="achievement-image" src={achievement.image} alt={`${achievement.title} evidence`} width={800} height={500} sizes="(max-width: 700px) 100vw, 33vw" /> : null}
+      {achievement.image ? (
+        <div className="achievement-image-frame">
+          <Image className="achievement-image" src={achievement.image} alt={`${achievement.title} evidence`} fill sizes="(max-width: 700px) 100vw, 33vw" />
+        </div>
+      ) : null}
       <div className="achievement-card-top">
         <span className="project-number">ACHIEVEMENT / {String(index + 1).padStart(2, "0")}</span>
         <span className="achievement-year">{achievement.year ?? "YEAR TBD"}</span>

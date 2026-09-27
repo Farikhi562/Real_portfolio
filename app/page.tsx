@@ -270,7 +270,7 @@ export default function Home() {
               description="A visual archive for competitions, technology exhibitions, campus events, and team projects. Photos will be added when available."
             />
             <div className="activities-grid">
-              {activities.map((activity, index) => <ActivityCard key={activity.id} activity={activity} index={index} />)}
+              {activities.slice(0, 4).map((activity, index) => <ActivityCard key={activity.id} activity={activity} index={index} />)}
             </div>
             <Link className="button button-secondary section-action" href="/activities">View more activities <span aria-hidden="true">↗</span></Link>
           </div>

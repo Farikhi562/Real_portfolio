@@ -25,7 +25,11 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
         <h3>{project.title}</h3>
         <p className="project-description">{project.description}</p>
       </div>
-      {project.image ? <Image className="project-image" src={project.image} alt={`${project.title} project`} width={1200} height={720} sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 560px" /> : null}
+      {project.image ? (
+        <div className="project-image-frame">
+          <Image className="project-image" src={project.image} alt={`${project.title} project`} fill sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 560px" />
+        </div>
+      ) : null}
       {featured ? (
         <div className="pipeline" aria-label="Simplified RAG question-answering flow">
           <div className="pipeline-label"><span className="signal-dot" /> SYSTEM FLOW</div>

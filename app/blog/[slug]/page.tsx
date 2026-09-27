@@ -33,7 +33,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <p className="eyebrow article-meta">{post.category} · {post.date}</p>
           <h1>{post.title}</h1>
           <p className="article-excerpt">{post.excerpt}</p>
-          {post.coverImage ? <Image className="article-cover" src={post.coverImage} alt="" width={1440} height={800} priority sizes="(max-width: 700px) 100vw, 900px" /> : null}
+          {post.coverImage ? (
+            <div className="article-cover-frame">
+              <Image className="article-cover" src={post.coverImage} alt="" fill priority sizes="(max-width: 700px) 100vw, 760px" />
+            </div>
+          ) : null}
           <div className="article-body">
             {post.body.map((paragraph, index) => <p key={`${post.slug}-${index}`}>{paragraph}</p>)}
           </div>
